@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -168,12 +169,44 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
         _statChip('Unsynced', '${s?.unsyncedCount ?? 0}', AppColors.amber),
         const Spacer(),
         if (_dbPath != null)
-          Row(children: [
-            const Icon(Icons.folder_outlined, size: 12, color: AppColors.textMuted),
-            const SizedBox(width: 4),
-            Text(_dbPath!,
-                style: const TextStyle(fontSize: 10, color: AppColors.textMuted, fontFamily: 'monospace')),
-          ]),
+          InkWell(
+            onTap: () async {
+              final newPath = await FilePicker.getDirectoryPath(
+                dialogTitle: 'Pilih Folder untuk Database',
+              );
+              if (newPath != null && mounted) {
+                try {
+                  setState(() => _loading = true);
+                  await prov.changeDatabaseDirectory(newPath);
+                  await _load(offset: 0);
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Lokasi database berhasil dipindahkan!'),
+                      backgroundColor: AppColors.onlineBg,
+                    ));
+                  }
+                } catch (e) {
+                  setState(() => _loading = false);
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Gagal memindah database: $e'),
+                      backgroundColor: AppColors.dangerBg,
+                    ));
+                  }
+                }
+              }
+            },
+            borderRadius: BorderRadius.circular(4),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+              child: Row(children: [
+                const Icon(Icons.drive_file_move_outline, size: 12, color: AppColors.blue),
+                const SizedBox(width: 4),
+                Text(_dbPath!,
+                    style: const TextStyle(fontSize: 10, color: AppColors.textMuted, fontFamily: 'monospace', decoration: TextDecoration.underline)),
+              ]),
+            ),
+          ),
       ]),
     );
   }

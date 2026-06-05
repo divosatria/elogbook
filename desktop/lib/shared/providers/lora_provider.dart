@@ -116,6 +116,13 @@ class LoraProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> changeDatabaseDirectory(String newPath) async {
+    await _db.changeDatabaseDirectory(newPath);
+    dbPath = await _db.getDatabasePath();
+    await _refreshStats();
+    notifyListeners();
+  }
+
   Future<int> deleteOldData(int days) async {
     final n = await _db.deleteOlderThan(days);
     await _refreshStats();

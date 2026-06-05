@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'package:test_lora/data/models/lora_record.dart';
@@ -9,6 +10,7 @@ class LoraDatabase {
   static const _dbName = 'lora_receiver.db';
   static const _dbVersion = 2;
   static const _table = 'lora_packets';
+  static const _prefDbPath = 'lora_db_dir_path';
 
   static LoraDatabase? _instance;
   static Database? _db;
@@ -30,8 +32,8 @@ class LoraDatabase {
   }
 
   Future<Database> _openDatabase() async {
-    final dir = await getApplicationDocumentsDirectory();
-    final path = p.join(dir.path, 'LoRaReceiver', _dbName);
+    final dirPath = await _getDbDirectory();
+    final path = p.join(dirPath, _dbName);
 
     // Pastikan direktori ada
     await Directory(p.dirname(path)).create(recursive: true);
@@ -225,10 +227,53 @@ class LoraDatabase {
     );
   }
 
-  /// Path file database (untuk ditampilkan di UI)
   Future<String> getDatabasePath() async {
+    final dirPath = await _getDbDirectory();
+    return p.join(dirPath, _dbName);
+  }
+
+  Future<String> _getDbDirectory() async {
+    final prefs = await SharedPreferences.getInstance();
+    final customPath = prefs.getString(_prefDbPath);
+    if (customPath != null && customPath.isNotEmpty) {
+      return customPath;
+    }
     final dir = await getApplicationDocumentsDirectory();
-    return p.join(dir.path, 'LoRaReceiver', _dbName);
+    return p.join(dir.path, 'LoRaReceiver');
+  }
+
+  /// Pindah lokasi file database dan hapus dari lokasi lama
+  Future<void> changeDatabaseDirectory(String newDirPath) async {
+    final oldDirPath = await _getDbDirectory();
+    if (oldDirPath == newDirPath) return;
+
+    final oldPath = p.join(oldDirPath, _dbName);
+    final newPath = p.join(newDirPath, _dbName);
+
+    // 1. Tutup koneksi aktif
+    await _db?.close();
+    _db = null;
+
+    // 2. Pindahkan file jika ada
+    final oldFile = File(oldPath);
+    if (await oldFile.exists()) {
+      await Directory(newDirPath).create(recursive: true);
+      // Copy lalu delete (lebih aman antar drive di Windows)
+      await oldFile.copy(newPath);
+      
+      for (final ext in ['-journal', '-shm', '-wal']) {
+        final f = File('$oldPath$ext');
+        if (await f.exists()) {
+          await f.copy('$newPath$ext');
+          await f.delete();
+        }
+      }
+      await oldFile.delete();
+    }
+
+    // 3. Simpan ke preferensi
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_prefDbPath, newDirPath);
   }
 
   Future<void> close() async {
