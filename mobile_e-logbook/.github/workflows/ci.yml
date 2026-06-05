@@ -1,0 +1,48 @@
+name: CI - Analyze & Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.32.8"
+          channel: "stable"
+          cache: true
+
+      - name: Setup env
+        run: |
+          cat > .env << EOF
+          API_BASE_URL=http://192.168.1.18:5000/api
+          GEMINI_API_KEY=dummy_key_for_ci
+          GEMINI_MODEL=gemini-2.5-flash
+          GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
+          GOOGLE_MAPS_API_KEY=dummy_key_for_ci
+          OPENWEATHER_API_KEY=dummy_key_for_ci
+          EOF
+
+      - name: Setup google-services.json
+        run: |
+          cat > android/app/google-services.json << 'EOF'
+          {
+            "project_info": { "project_number": "000000000000", "project_id": "dummy-ci", "storage_bucket": "dummy-ci.appspot.com" },
+            "client": [{ "client_info": { "mobilesdk_app_id": "1:000000000000:android:0000000000000000", "android_client_info": { "package_name": "com.example.e_logbook" } }, "oauth_client": [], "api_key": [{ "current_key": "dummy" }], "services": { "appinvite_service": { "other_platform_oauth_client": [] } } }],
+            "configuration_version": "1"
+          }
+          EOF
+
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings

@@ -1,0 +1,95 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - img "E-Logbook Logo" [ref=e6]
+      - heading "E-Logbook Admin" [level=1] [ref=e7]
+      - paragraph [ref=e8]:
+        - text: Sistem Manajemen Logbook Digital untuk
+        - text: Penangkapan Ikan
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - img "IPB University" [ref=e12]
+          - heading "Selamat Datang di" [level=2] [ref=e13]
+          - heading "E-Logbook Admin" [level=3] [ref=e14]
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - generic [ref=e18]: Username
+            - generic [ref=e19]:
+              - img [ref=e20]
+              - textbox "Masukkan username" [ref=e23]
+          - generic [ref=e24]:
+            - generic [ref=e25]: Password
+            - generic [ref=e26]:
+              - img [ref=e27]
+              - textbox "Masukkan password" [ref=e30]
+              - button [ref=e31] [cursor=pointer]:
+                - img [ref=e32]
+          - button "Masuk" [ref=e35] [cursor=pointer]
+          - link "Lupa Password?" [ref=e37] [cursor=pointer]:
+            - /url: /forgot-password
+      - generic [ref=e38]:
+        - paragraph [ref=e39]: Versi 1.0.1
+        - paragraph [ref=e40]: © 2026 IPB University. All rights reserved.
+  - button "/agentation v1.3.2 Output Detail Standard Marker Colour Purple Blue Cyan Green Yellow Orange Red Clear after output Block page interactions" [ref=e41] [cursor=pointer]:
+    - img [ref=e43]
+    - generic:
+      - generic:
+        - button:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button:
+          - img
+      - generic:
+        - button:
+          - img
+    - generic:
+      - generic:
+        - generic: /agentation
+        - generic: v1.3.2
+        - button "Switch to light mode":
+          - img
+      - generic:
+        - generic:
+          - generic:
+            - text: Output Detail
+            - generic:
+              - img
+          - button "Standard":
+            - generic: Standard
+      - generic:
+        - generic: Marker Colour
+        - generic:
+          - generic:
+            - generic "Purple"
+          - generic:
+            - generic "Blue"
+          - generic:
+            - generic "Cyan"
+          - generic:
+            - generic "Green"
+          - generic:
+            - generic "Yellow"
+          - generic:
+            - generic "Orange"
+          - generic:
+            - generic "Red"
+      - generic:
+        - generic:
+          - checkbox "Clear after output"
+          - generic:
+            - text: Clear after output
+            - generic:
+              - img
+        - generic:
+          - checkbox "Block page interactions"
+          - generic: Block page interactions

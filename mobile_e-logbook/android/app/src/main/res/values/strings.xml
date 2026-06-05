@@ -1,0 +1,4 @@
+<resources>
+    <!-- Placeholder for Google Maps API key - will be replaced during build -->
+    <string name="google_maps_key_placeholder">PLACEHOLDER_GOOGLE_MAPS_KEY</string>
+</resources>

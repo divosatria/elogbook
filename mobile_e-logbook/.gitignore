@@ -1,0 +1,39 @@
+# Environment variables
+.env
+.env.local
+*.env
+!.env.example
+
+# Sensitive files
+*.key
+*.pem
+*.p12
+*.keystore
+*.jks
+
+# Firebase
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Google Maps API key
+android/app/src/main/res/values/google_maps_api.xml
+
+# Build files
+build/
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+*.lcov

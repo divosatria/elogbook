@@ -1,0 +1,109 @@
+components/AccountManagement.tsx(342,30): error TS2339: Property 'documents' does not exist on type 'unknown'.
+components/AccountManagement.tsx(344,15): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(346,15): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(348,15): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(359,68): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(360,69): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(361,69): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(364,21): error TS2345: Argument of type 'unknown[]' is not assignable to parameter of type 'SetStateAction<Document[]>'.
+  Type 'unknown[]' is not assignable to type 'Document[]'.
+    Type '{}' is missing the following properties from type 'Document': id, tripId, nahkodaId, nahkodaNama, and 6 more.
+components/AccountManagement.tsx(380,40): error TS2339: Property 'groupedDocs' does not exist on type 'Document'.
+components/AccountManagement.tsx(381,45): error TS2339: Property 'groupedDocs' does not exist on type 'Document'.
+components/AccountManagement.tsx(385,45): error TS2353: Object literal may only specify known properties, and 'groupedDocs' does not exist in type 'SetStateAction<Document>'.
+components/AccountManagement.tsx(399,56): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(400,57): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(401,57): error TS2339: Property 'overallStatus' does not exist on type 'unknown'.
+components/AccountManagement.tsx(502,24): error TS2554: Expected 2 arguments, but got 1.
+components/AccountManagement.tsx(526,33): error TS2339: Property 'groupedDocs' does not exist on type 'Document'.
+components/AccountManagement.tsx(545,24): error TS2339: Property 'groupedDocs' does not exist on type 'Document'.
+components/AccountManagement.tsx(546,41): error TS2339: Property 'groupedDocs' does not exist on type 'Document'.
+components/AccountManagement.tsx(557,41): error TS2353: Object literal may only specify known properties, and 'groupedDocs' does not exist in type 'SetStateAction<Document>'.
+components/AccountManagement.tsx(1093,74): error TS2339: Property 'documents' does not exist on type 'Document'.
+components/AccountManagement.tsx(1095,38): error TS2339: Property 'documents' does not exist on type 'Document'.
+components/AccountManagement.tsx(1116,45): error TS2339: Property 'lastUpload' does not exist on type 'Document'.
+components/AccountManagement.tsx(1121,138): error TS2339: Property 'overallStatus' does not exist on type 'Document'.
+components/AccountManagement.tsx(1122,48): error TS2339: Property 'overallStatus' does not exist on type 'Document'.
+components/AccountManagement.tsx(1123,40): error TS2339: Property 'overallStatus' does not exist on type 'Document'.
+components/AccountManagement.tsx(1129,70): error TS2339: Property 'documents' does not exist on type 'Document'.
+components/AccountManagement.tsx(1129,103): error TS2339: Property 'documents' does not exist on type 'Document'.
+components/AccountManagement.tsx(1420,28): error TS2339: Property 'groupedDocs' does not exist on type 'Document'.
+components/AccountManagement.tsx(1423,34): error TS2339: Property 'groupedDocs' does not exist on type 'Document'.
+components/CatchHistory.tsx(89,17): error TS2304: Cannot find name 'WiDaySunny'.
+components/CatchHistory.tsx(96,17): error TS2304: Cannot find name 'WiCloudy'.
+components/CatchHistory.tsx(103,17): error TS2304: Cannot find name 'WiRain'.
+components/CatchHistory.tsx(110,17): error TS2304: Cannot find name 'WiStormShowers'.
+components/CatchHistory.tsx(117,17): error TS2304: Cannot find name 'WiDaySunny'.
+components/DataKapal.tsx(335,27): error TS2339: Property 'gpsDeviceId' does not exist on type 'Vessel'.
+components/DataKapal.tsx(335,49): error TS2339: Property 'gpsDevice' does not exist on type 'Vessel'.
+components/DataKapal.tsx(336,7): error TS2322: Type 'VesselEngine' is not assignable to type '{ merk: string; daya: string; tahun: string; }'.
+  Property 'merk' is optional in type 'VesselEngine' but required in type '{ merk: string; daya: string; tahun: string; }'.
+components/DataKapal.tsx(337,7): error TS2322: Type 'VesselGPS' is not assignable to type '{ merk: string; tipe: string; status: "aktif"; }'.
+  Property 'merk' is optional in type 'VesselGPS' but required in type '{ merk: string; tipe: string; status: "aktif"; }'.
+components/DataKapal.tsx(338,7): error TS2322: Type 'VesselCertificate' is not assignable to type '{ nomor: string; berlaku: string; }'.
+  Property 'nomor' is optional in type 'VesselCertificate' but required in type '{ nomor: string; berlaku: string; }'.
+components/DataKapal.tsx(339,7): error TS2322: Type 'VesselFuel' is not assignable to type '{ kapasitas: number; jenis: "solar"; konsumsi: number; }'.
+  Property 'kapasitas' is optional in type 'VesselFuel' but required in type '{ kapasitas: number; jenis: "solar"; konsumsi: number; }'.
+components/DataKapal.tsx(344,7): error TS2322: Type 'VesselInsurance' is not assignable to type '{ perusahaan: string; nomor: string; berlaku: string; }'.
+  Property 'perusahaan' is optional in type 'VesselInsurance' but required in type '{ perusahaan: string; nomor: string; berlaku: string; }'.
+components/DataKapal.tsx(1343,36): error TS2339: Property 'gpsDevice' does not exist on type 'Vessel'.
+components/DataKapal.tsx(1356,44): error TS2339: Property 'gpsDevice' does not exist on type 'Vessel'.
+components/DataKapal.tsx(1359,44): error TS2339: Property 'gpsDevice' does not exist on type 'Vessel'.
+components/DataKapal.tsx(1360,44): error TS2339: Property 'gpsDevice' does not exist on type 'Vessel'.
+components/DataPerangkat.tsx(299,21): error TS2304: Cannot find name 'FiCpu'.
+components/DataPerangkat.tsx(305,21): error TS2304: Cannot find name 'TbSailboat'.
+components/DataPerangkat.tsx(311,21): error TS2304: Cannot find name 'TbSailboatOff'.
+components/DataPerangkat.tsx(320,21): error TS2304: Cannot find name 'HiOutlineWrenchScrewdriver'.
+components/ForgotPassword.tsx(39,20): error TS2339: Property 'success' does not exist on type 'unknown'.
+components/ForgotPassword.tsx(43,27): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/HarborZones.tsx(180,13): error TS2304: Cannot find name 'BsFillFuelPumpFill'.
+components/HarborZones.tsx(186,13): error TS2304: Cannot find name 'HiOutlineWrenchScrewdriver'.
+components/HarborZones.tsx(189,50): error TS2304: Cannot find name 'MdWarehouse'.
+components/HarborZones.tsx(190,54): error TS2304: Cannot find name 'GiLighthouse'.
+components/HarborZones.tsx(194,13): error TS2304: Cannot find name 'FaCompass'.
+components/HarborZones.tsx(1260,21): error TS2304: Cannot find name 'MdAnchor'.
+components/HarborZones.tsx(1266,21): error TS2304: Cannot find name 'FaAnchorLock'.
+components/HarborZones.tsx(1272,21): error TS2304: Cannot find name 'GiShipBow'.
+components/HarborZones.tsx(1278,21): error TS2304: Cannot find name 'TbMap2'.
+components/Layout.tsx(99,50): error TS2304: Cannot find name 'IoFishSharp'.
+components/Layout.tsx(100,59): error TS2552: Cannot find name 'FaFileSignature'. Did you mean 'FileSignature'?
+components/Layout.tsx(101,49): error TS2304: Cannot find name 'TiWeatherPartlySunny'.
+components/Layout.tsx(102,54): error TS2304: Cannot find name 'GiRadarSweep'.
+components/Layout.tsx(104,49): error TS2304: Cannot find name 'AiFillAlert'.
+components/Layout.tsx(105,58): error TS2552: Cannot find name 'FaUsersCog'. Did you mean 'UserCog'?
+components/Layout.tsx(106,50): error TS2552: Cannot find name 'SlSettings'. Did you mean 'Settings'?
+components/Layout.tsx(110,49): error TS2304: Cannot find name 'IoMdBoat'.
+components/Layout.tsx(111,55): error TS2552: Cannot find name 'FiCpu'. Did you mean 'Cpu'?
+components/Layout.tsx(112,60): error TS2552: Cannot find name 'MdAnchor'. Did you mean 'Anchor'?
+components/Layout.tsx(113,61): error TS2304: Cannot find name 'TbLassoPolygonFilled'.
+components/LocationPickerSimple.tsx(63,41): error TS2339: Property 'checkPointInPolygon' does not exist on type 'BackendService'.
+components/MonitoringPage.tsx(57,20): error TS2339: Property 'success' does not exist on type 'unknown'.
+components/MonitoringPage.tsx(58,70): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/MonitoringPage.tsx(298,19): error TS2304: Cannot find name 'LuLocateFixed'.
+components/MonitoringPage.tsx(304,19): error TS2304: Cannot find name 'GiShipBow'.
+components/MonitoringPage.tsx(310,19): error TS2304: Cannot find name 'FaCheckCircle'.
+components/MonitoringPage.tsx(316,19): error TS2304: Cannot find name 'TiAnchor'.
+components/RealTimeMonitoringMap.tsx(130,20): error TS2339: Property 'success' does not exist on type 'unknown'.
+components/RealTimeMonitoringMap.tsx(131,87): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/ResetPassword.tsx(37,22): error TS2339: Property 'success' does not exist on type 'unknown'.
+components/ResetPassword.tsx(39,33): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/ResetPassword.tsx(41,29): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/ResetPassword.tsx(108,20): error TS2339: Property 'success' does not exist on type 'unknown'.
+components/ResetPassword.tsx(115,27): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/SOSAlerts.tsx(332,19): error TS2304: Cannot find name 'LuSiren'.
+components/SOSAlerts.tsx(338,19): error TS2304: Cannot find name 'FaCheckCircle'.
+components/SOSAlerts.tsx(344,19): error TS2304: Cannot find name 'TbAlertTriangleFilled'.
+components/SOSAlerts.tsx(350,19): error TS2304: Cannot find name 'LuMessageCircleCode'.
+components/TripManagement.tsx(246,21): error TS2339: Property 'success' does not exist on type 'unknown'.
+components/TripManagement.tsx(246,42): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/TripManagement.tsx(247,71): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/TripManagement.tsx(248,75): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/TripManagement.tsx(249,35): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/TripManagement.tsx(839,39): error TS2339: Property 'success' does not exist on type 'unknown'.
+components/TripManagement.tsx(839,60): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/TripManagement.tsx(840,78): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/TripManagement.tsx(841,53): error TS2339: Property 'data' does not exist on type 'unknown'.
+components/TripManagement.tsx(2085,17): error TS2322: Type 'string | true' is not assignable to type 'boolean'.
+  Type 'string' is not assignable to type 'boolean'.
+components/TripManagement.tsx(2171,17): error TS2322: Type 'string | true' is not assignable to type 'boolean'.
+  Type 'string' is not assignable to type 'boolean'.

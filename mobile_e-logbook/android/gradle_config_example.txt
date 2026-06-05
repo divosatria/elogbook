@@ -1,0 +1,16 @@
+// Add this to android/app/build.gradle in the android block
+
+android {
+    // ... existing configuration
+
+    buildTypes {
+        debug {
+            // ... existing debug config
+            resValue "string", "google_maps_key_placeholder", project.findProperty('GOOGLE_MAPS_API_KEY') ?: 'PLACEHOLDER_GOOGLE_MAPS_KEY'
+        }
+        release {
+            // ... existing release config  
+            resValue "string", "google_maps_key_placeholder", project.findProperty('GOOGLE_MAPS_API_KEY') ?: 'PLACEHOLDER_GOOGLE_MAPS_KEY'
+        }
+    }
+}

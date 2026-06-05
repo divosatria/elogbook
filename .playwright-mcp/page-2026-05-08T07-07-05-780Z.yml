@@ -1,0 +1,62 @@
+- button "/agentation v1.3.2 Output Detail Standard Marker Colour Purple Blue Cyan Green Yellow Orange Red Clear after output Block page interactions" [ref=e1] [cursor=pointer]:
+  - img [ref=e3]
+  - generic:
+    - generic:
+      - button:
+        - img
+    - generic:
+      - button [disabled]:
+        - img
+    - generic:
+      - button [disabled]:
+        - img
+    - generic:
+      - button [disabled]:
+        - img
+    - generic:
+      - button:
+        - img
+    - generic:
+      - button:
+        - img
+  - generic:
+    - generic:
+      - generic: /agentation
+      - generic: v1.3.2
+      - button "Switch to light mode":
+        - img
+    - generic:
+      - generic:
+        - generic:
+          - text: Output Detail
+          - generic:
+            - img
+        - button "Standard":
+          - generic: Standard
+    - generic:
+      - generic: Marker Colour
+      - generic:
+        - generic:
+          - generic "Purple"
+        - generic:
+          - generic "Blue"
+        - generic:
+          - generic "Cyan"
+        - generic:
+          - generic "Green"
+        - generic:
+          - generic "Yellow"
+        - generic:
+          - generic "Orange"
+        - generic:
+          - generic "Red"
+    - generic:
+      - generic:
+        - checkbox "Clear after output"
+        - generic:
+          - text: Clear after output
+          - generic:
+            - img
+      - generic:
+        - checkbox "Block page interactions"
+        - generic: Block page interactions

@@ -1,0 +1,174 @@
+name: Build & Release APK
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: "17"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.5"
+          channel: "stable"
+          cache: true
+
+      - name: Precache Flutter artifacts
+        run: |
+          flutter precache --android
+          flutter doctor -v
+
+      - name: Create .env file
+        run: |
+          cat > .env << EOF
+          API_BASE_URL=http://192.168.1.18:5000/api
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL=gemini-1.5-flash
+          GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
+          GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
+          OPENWEATHER_API_KEY=${{ secrets.OPENWEATHER_API_KEY }}
+          EOF
+
+      - name: Create local.properties
+        run: |
+          cat > android/local.properties << EOF
+          flutter.sdk=$FLUTTER_ROOT
+          sdk.dir=$ANDROID_HOME
+          EOF
+          cat android/local.properties
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Fix build.gradle.kts for CI/CD
+        run: |
+          cat > android/app/build.gradle.kts << 'EOF'
+          plugins {
+              id("com.android.application")
+              id("kotlin-android")
+              id("com.google.gms.google-services") version "4.4.2" apply false
+              id("dev.flutter.flutter-gradle-plugin")
+          }
+
+          import java.util.Properties
+          import java.io.FileInputStream
+
+          flutter {
+              source = "../.."
+          }
+
+          android {
+              namespace = "com.example.e_logbook"
+              compileSdk = 36
+              ndkVersion = "27.0.12077973"
+              
+              compileOptions {
+                  sourceCompatibility = JavaVersion.VERSION_11
+                  targetCompatibility = JavaVersion.VERSION_11
+                  isCoreLibraryDesugaringEnabled = true
+              }
+              
+              kotlinOptions {
+                  jvmTarget = JavaVersion.VERSION_11.toString()
+                  freeCompilerArgs += listOf("-Xsuppress-version-warnings")
+              }
+              
+              defaultConfig {
+                  applicationId = "com.example.e_logbook"
+                  minSdk = 21
+                  targetSdk = 36
+                  versionCode = 1
+                  versionName = "1.0.0"
+                  
+                  val envProperties = Properties()
+                  val envFile = rootProject.file("../.env")
+                  if (envFile.exists()) {
+                      envProperties.load(FileInputStream(envFile))
+                  }
+                  manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = envProperties.getProperty("GOOGLE_MAPS_API_KEY", "")
+              }
+              
+              buildTypes {
+                  release {
+                      isMinifyEnabled = false
+                      isShrinkResources = false
+                      signingConfig = signingConfigs.getByName("debug")
+                  }
+              }
+          }
+
+          dependencies {
+              coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+          }
+
+          apply(plugin = "com.google.gms.google-services")
+          EOF
+          echo "=== build.gradle.kts replaced ==="
+
+      - name: Verify Flutter properties
+        run: |
+          echo "=== local.properties ==="
+          cat android/local.properties
+          echo ""
+          echo "=== gradle.properties ==="
+          cat android/gradle.properties
+          echo ""
+          echo "=== FLUTTER_ROOT ==="
+          echo $FLUTTER_ROOT
+          echo ""
+          echo "=== Flutter version ==="
+          flutter --version
+
+      - name: Build APK (Release)
+        run: flutter build apk --release
+
+      - name: Rename APK
+        run: |
+          cd build/app/outputs/flutter-apk
+          mv app-release.apk e-logbook-universal.apk
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            build/app/outputs/flutter-apk/e-logbook-universal.apk
+          body: |
+            ## 📱 E-Logbook Release ${{ github.ref_name }}
+
+            ### 📥 Download APK
+            Universal APK (works on all devices)
+
+            ### ✨ What's New
+            - Bug fixes and improvements
+
+            ### 📋 Requirements
+            - Android 5.0 (API 21) or higher
+            - Internet connection
+            - GPS enabled
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-builds
+          path: build/app/outputs/flutter-apk/*.apk
+          retention-days: 30

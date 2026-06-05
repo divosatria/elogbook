@@ -1,0 +1,7 @@
+- generic [ref=e47]:
+  - img [ref=e49]
+  - heading "Terjadi Kesalahan" [level=2] [ref=e51]
+  - paragraph [ref=e52]: Aplikasi mengalami masalah. Silakan muat ulang halaman.
+  - button "Muat Ulang" [ref=e53] [cursor=pointer]:
+    - img [ref=e54]
+    - generic [ref=e59]: Muat Ulang

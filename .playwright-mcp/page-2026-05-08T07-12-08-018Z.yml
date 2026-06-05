@@ -1,0 +1,444 @@
+- generic [ref=e1]:
+  - generic [ref=e49]:
+    - complementary [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - img [ref=e54]
+          - generic [ref=e58]: E-Logbook Maritime
+        - button [ref=e59] [cursor=pointer]:
+          - img [ref=e60]
+      - navigation [ref=e64]:
+        - button "Data Master" [active] [ref=e66] [cursor=pointer]:
+          - img [ref=e67]
+          - generic [ref=e72]:
+            - generic [ref=e73]: Data Master
+            - img [ref=e74]
+        - button "Dasbor" [ref=e76] [cursor=pointer]:
+          - img [ref=e77]
+          - generic [ref=e83]: Dasbor
+        - button "Hasil Tangkap" [ref=e84] [cursor=pointer]:
+          - img [ref=e85]
+          - generic [ref=e92]: Hasil Tangkap
+        - button "Perizinan & Perjalanan" [ref=e93] [cursor=pointer]:
+          - img [ref=e94]
+          - generic [ref=e98]: Perizinan & Perjalanan
+        - button "Cuaca Laut" [ref=e99] [cursor=pointer]:
+          - img [ref=e100]
+          - generic [ref=e106]: Cuaca Laut
+        - button "Pemantauan Langsung" [ref=e107] [cursor=pointer]:
+          - img [ref=e108]
+          - generic [ref=e116]: Pemantauan Langsung
+        - button "Sinyal Darurat" [ref=e117] [cursor=pointer]:
+          - img [ref=e118]
+          - generic [ref=e121]: Sinyal Darurat
+        - button "Manajemen Pengguna" [ref=e122] [cursor=pointer]:
+          - img [ref=e123]
+          - generic [ref=e129]: Manajemen Pengguna
+        - button "Pengaturan" [ref=e130] [cursor=pointer]:
+          - img [ref=e131]
+          - generic [ref=e135]: Pengaturan
+      - button "Keluar" [ref=e137] [cursor=pointer]:
+        - img [ref=e138]
+        - generic [ref=e141]: Keluar
+    - main [ref=e142]:
+      - generic [ref=e143]:
+        - heading "Dashboard" [level=1] [ref=e145]
+        - generic [ref=e147]: Jumat, 8 Mei 2026 pukul 14.12.07WIB
+      - generic [ref=e151]:
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - generic:
+              - img
+            - generic [ref=e154]:
+              - generic [ref=e155]:
+                - generic [ref=e156]:
+                  - heading "Status Operasional" [level=2] [ref=e157]
+                  - generic [ref=e162]: SYSTEM ONLINE
+                  - generic [ref=e163]:
+                    - img [ref=e164]
+                    - text: Admin
+                - button "Refresh Data" [ref=e166] [cursor=pointer]:
+                  - img [ref=e167]
+              - generic [ref=e172]:
+                - generic [ref=e173]:
+                  - generic [ref=e174]: 14:12
+                  - generic [ref=e175]: "07"
+                  - generic [ref=e176]: WIB
+                - generic [ref=e177]:
+                  - img [ref=e178]
+                  - paragraph [ref=e180]: Jumat, 8 Mei 2026
+              - generic [ref=e183]:
+                - img [ref=e185]
+                - generic [ref=e188]:
+                  - heading "Sistem Aman" [level=3] [ref=e189]
+                  - paragraph [ref=e190]: Sistem pemantauan bahaya & keselamatan aktif.
+              - generic [ref=e192]:
+                - img [ref=e193]
+                - generic [ref=e196]: "Update: 14.11"
+          - generic [ref=e201]:
+            - generic [ref=e202]:
+              - heading "Cuaca Maritim" [level=2] [ref=e203]
+              - button "Refresh Cuaca" [ref=e204] [cursor=pointer]:
+                - img [ref=e205]
+            - generic [ref=e210]:
+              - generic [ref=e211]:
+                - img [ref=e213]
+                - generic [ref=e215]:
+                  - paragraph [ref=e216]: 33°C
+                  - paragraph [ref=e217]: awan tersebar
+                  - paragraph [ref=e218]: Cideng
+                - generic [ref=e219]:
+                  - generic [ref=e220]:
+                    - img [ref=e221]
+                    - generic [ref=e224]: AMAN
+                  - paragraph [ref=e227]: 100/100
+              - generic [ref=e228]:
+                - generic [ref=e229]:
+                  - img [ref=e230]
+                  - generic [ref=e232]:
+                    - paragraph [ref=e233]: Terasa
+                    - paragraph [ref=e234]: 38°C
+                - generic [ref=e235]:
+                  - img [ref=e236]
+                  - generic [ref=e240]:
+                    - paragraph [ref=e241]: Angin
+                    - paragraph [ref=e242]: 3.89 m/s
+                - generic [ref=e243]:
+                  - img [ref=e244]
+                  - generic [ref=e247]:
+                    - paragraph [ref=e248]: Kelembaban
+                    - paragraph [ref=e249]: 56%
+              - generic [ref=e250]:
+                - generic [ref=e251]:
+                  - heading "Prakiraan 24 Jam" [level=4] [ref=e252]:
+                    - img [ref=e253]
+                    - text: Prakiraan 24 Jam
+                  - link "Lihat Detail" [ref=e256] [cursor=pointer]:
+                    - /url: /weather
+                    - text: Lihat Detail
+                    - img [ref=e257]
+                - generic [ref=e261]:
+                  - generic [ref=e262]:
+                    - paragraph [ref=e263]: "16.00"
+                    - img [ref=e265]
+                    - paragraph [ref=e267]: 33°
+                  - generic [ref=e268]:
+                    - paragraph [ref=e269]: "19.00"
+                    - img [ref=e271]
+                    - paragraph [ref=e273]: 31°
+                  - generic [ref=e274]:
+                    - paragraph [ref=e275]: "22.00"
+                    - img [ref=e277]
+                    - paragraph [ref=e279]: 30°
+                  - generic [ref=e280]:
+                    - paragraph [ref=e281]: "01.00"
+                    - img [ref=e283]
+                    - paragraph [ref=e285]: 30°
+                  - generic [ref=e286]:
+                    - paragraph [ref=e287]: "04.00"
+                    - img [ref=e289]
+                    - paragraph [ref=e291]: 28°
+                  - generic [ref=e292]:
+                    - paragraph [ref=e293]: "07.00"
+                    - img [ref=e295]
+                    - paragraph [ref=e298]: 30°
+                  - generic [ref=e299]:
+                    - paragraph [ref=e300]: "10.00"
+                    - img [ref=e302]
+                    - paragraph [ref=e305]: 30°
+                  - generic [ref=e306]:
+                    - paragraph [ref=e307]: "13.00"
+                    - img [ref=e309]
+                    - paragraph [ref=e312]: 30°
+              - generic [ref=e313]:
+                - generic [ref=e314]: "Diperbarui: 8/5/2026, 14.11.57"
+                - generic [ref=e315]: OpenWeatherMap
+        - generic [ref=e316]:
+          - generic [ref=e317]:
+            - generic [ref=e318]:
+              - generic [ref=e319]:
+                - heading "Komposisi Ikan" [level=3] [ref=e320]
+                - paragraph [ref=e321]: Breakdown Tangkapan
+              - img [ref=e323]
+            - generic [ref=e329]:
+              - img [ref=e332]:
+                - generic [ref=e333]:
+                  - img [ref=e335]
+                  - img [ref=e337]
+                  - img [ref=e339]
+              - generic:
+                - generic: 527,8
+                - generic: KG TOTAL
+            - generic [ref=e340]:
+              - generic [ref=e341]:
+                - generic "Tenggiri" [ref=e344]
+                - generic [ref=e345]:
+                  - generic [ref=e346]: "400"
+                  - generic [ref=e348]: 76%
+              - generic [ref=e349]:
+                - generic "Tuna" [ref=e352]
+                - generic [ref=e353]:
+                  - generic [ref=e354]: "90"
+                  - generic [ref=e356]: 17%
+              - generic [ref=e357]:
+                - generic "Tuna sirip kuning" [ref=e360]
+                - generic [ref=e361]:
+                  - generic [ref=e362]: 37,8
+                  - generic [ref=e364]: 7%
+          - generic [ref=e365]:
+            - generic [ref=e698]:
+              - generic [ref=e699]:
+                - img [ref=e701]
+                - generic [ref=e705]: Tahun Ini
+              - generic [ref=e706]:
+                - heading "10" [level=2] [ref=e707]
+                - text: Total Trip
+              - img [ref=e708]
+            - generic [ref=e712]:
+              - generic [ref=e713]:
+                - img [ref=e715]
+                - generic [ref=e717]: Live
+              - generic [ref=e718]:
+                - heading "1" [level=2] [ref=e719]
+                - text: Trip Aktif
+              - img [ref=e720]
+            - generic [ref=e722]:
+              - generic [ref=e723]:
+                - img [ref=e725]
+                - generic [ref=e728]: Unit
+              - generic [ref=e729]:
+                - heading "4" [level=2] [ref=e730]
+                - text: Total Armada
+              - img [ref=e731]
+            - generic [ref=e734]:
+              - generic [ref=e735]:
+                - img [ref=e737]
+                - generic [ref=e741]: Ton
+              - generic [ref=e742]:
+                - heading "0.5" [level=2] [ref=e743]
+                - text: Total Tangkapan
+              - img [ref=e744]
+            - generic [ref=e417]:
+              - img [ref=e419]
+              - generic [ref=e422]:
+                - heading "0 Sinyal Darurat (SOS)" [level=3] [ref=e423]
+                - paragraph [ref=e424]: Sistem pemantauan bahaya & keselamatan
+        - generic [ref=e425]:
+          - generic [ref=e427]:
+            - generic [ref=e429]:
+              - generic [ref=e430]:
+                - img [ref=e431]
+                - img [ref=e437]
+              - generic [ref=e443]: Real-time
+              - generic [ref=e444]: LIVE
+            - generic [ref=e446]:
+              - img [ref=e447]
+              - generic [ref=e451]: 1 / 2 GPS Aktif
+            - generic [ref=e452]:
+              - generic:
+                - generic [ref=e453]:
+                  - button "Zoom in" [ref=e454] [cursor=pointer]: +
+                  - button "Zoom out" [ref=e455] [cursor=pointer]: −
+                - generic [ref=e456]:
+                  - link "Leaflet" [ref=e457] [cursor=pointer]:
+                    - /url: https://leafletjs.com
+                    - img [ref=e458]
+                    - text: Leaflet
+                  - text: "| ©"
+                  - link "CARTO" [ref=e462] [cursor=pointer]:
+                    - /url: https://carto.com/
+                  - text: "| ©"
+                  - link "OpenStreetMap" [ref=e463] [cursor=pointer]:
+                    - /url: https://www.openstreetmap.org/copyright
+                  - text: ", ©"
+                  - link "OpenSeaMap" [ref=e464] [cursor=pointer]:
+                    - /url: http://www.openseamap.org
+            - button "Legenda" [ref=e465] [cursor=pointer]:
+              - img [ref=e466]
+              - generic [ref=e467]: Legenda
+              - img [ref=e468]
+            - generic [ref=e470]:
+              - paragraph [ref=e474]: LEGENDA PETA
+              - generic [ref=e475]:
+                - paragraph [ref=e476]: Status Kapal
+                - generic [ref=e477]:
+                  - img [ref=e478]
+                  - generic [ref=e480]: Sedang Berlayar
+                  - generic [ref=e481]: "1"
+                - generic [ref=e482]:
+                  - img [ref=e483]
+                  - generic [ref=e485]: Disetujui
+                  - generic [ref=e486]: "0"
+                - paragraph [ref=e488]: Zona & Lokasi
+                - generic [ref=e489]:
+                  - img [ref=e490]
+                  - generic [ref=e492]: Zona Pelabuhan
+                  - generic [ref=e493]: "6"
+                - generic [ref=e494]:
+                  - img [ref=e495]
+                  - generic [ref=e497]: Point of Interest
+                  - generic [ref=e498]: "8"
+                - generic [ref=e499]:
+                  - img [ref=e500]
+                  - generic [ref=e502]: Zona Tangkap
+                  - generic [ref=e503]: "3"
+                - generic [ref=e504]:
+                  - generic [ref=e505]: 🎣
+                  - generic [ref=e506]: Titik Jaring
+                  - generic [ref=e507]: "14"
+                - generic [ref=e509]:
+                  - img [ref=e510]
+                  - generic [ref=e512]: Status Darurat
+          - generic:
+            - generic [ref=e515]:
+              - img [ref=e517]
+              - generic [ref=e523]:
+                - heading "Live Fleet Monitoring" [level=2] [ref=e524]
+                - paragraph [ref=e525]: Real-time GPS System
+            - generic [ref=e526]:
+              - button [ref=e527] [cursor=pointer]:
+                - img [ref=e528]
+              - button [ref=e532] [cursor=pointer]:
+                - img [ref=e533]
+        - generic [ref=e538]:
+          - generic [ref=e539]:
+            - generic [ref=e540]:
+              - img [ref=e541]
+              - heading "Status Operasional" [level=3] [ref=e543]
+            - generic [ref=e544]:
+              - generic [ref=e545]:
+                - generic [ref=e546]:
+                  - img [ref=e547]
+                  - generic [ref=e550]: Menunggu
+                - generic [ref=e551]: "0"
+              - generic [ref=e552]:
+                - generic [ref=e553]:
+                  - img [ref=e554]
+                  - generic [ref=e557]: Disetujui
+                - generic [ref=e558]: "0"
+              - generic [ref=e559]:
+                - generic [ref=e560]:
+                  - img [ref=e561]
+                  - generic [ref=e565]: Berlayar
+                - generic [ref=e566]: "1"
+              - generic [ref=e567]:
+                - generic [ref=e568]:
+                  - img [ref=e569]
+                  - generic [ref=e573]: Selesai
+                - generic [ref=e574]: "7"
+          - generic [ref=e575]:
+            - generic [ref=e576]:
+              - img [ref=e577]
+              - heading "Log Aktivitas" [level=3] [ref=e579]
+            - generic [ref=e581]:
+              - generic [ref=e582]:
+                - img [ref=e586]
+                - generic [ref=e592]:
+                  - paragraph [ref=e594]:
+                    - img [ref=e595]
+                    - text: 15 days ago
+                  - paragraph [ref=e598]: Testing melaporkan tangkapan Tuna Sirip Kuning 18.90kg
+              - generic [ref=e599]:
+                - img [ref=e603]
+                - generic [ref=e609]:
+                  - paragraph [ref=e611]:
+                    - img [ref=e612]
+                    - text: 15 days ago
+                  - paragraph [ref=e615]: Testing melaporkan tangkapan Tuna Sirip Kuning 18.90kg
+              - generic [ref=e616]:
+                - img [ref=e620]
+                - generic [ref=e624]:
+                  - paragraph [ref=e626]:
+                    - img [ref=e627]
+                    - text: 15 days ago
+                  - paragraph [ref=e630]: Testing sedang berlayar
+              - generic [ref=e631]:
+                - img [ref=e635]
+                - generic [ref=e641]:
+                  - paragraph [ref=e643]:
+                    - img [ref=e644]
+                    - text: a month ago
+                  - paragraph [ref=e647]: KAPAL VESEL melaporkan tangkapan Tenggiri 200.00kg
+              - generic [ref=e648]:
+                - img [ref=e652]
+                - generic [ref=e658]:
+                  - paragraph [ref=e660]:
+                    - img [ref=e661]
+                    - text: 3 months ago
+                  - paragraph [ref=e664]: KAPAL VESEL telah menyelesaikan trip
+              - generic [ref=e665]:
+                - img [ref=e669]
+                - generic [ref=e675]:
+                  - paragraph [ref=e677]:
+                    - img [ref=e678]
+                    - text: 3 months ago
+                  - paragraph [ref=e681]: KM Samudra Indah melaporkan tangkapan Tenggiri 80.00kg
+              - generic [ref=e682]:
+                - img [ref=e685]
+                - generic [ref=e691]:
+                  - paragraph [ref=e693]:
+                    - img [ref=e694]
+                    - text: 3 months ago
+                  - paragraph [ref=e697]: KM Samudra Indah melaporkan tangkapan Tenggiri 120.00kg
+  - button "/agentation v1.3.2 Output Detail Standard Marker Colour Purple Blue Cyan Green Yellow Orange Red Clear after output Block page interactions" [ref=e41] [cursor=pointer]:
+    - img [ref=e43]
+    - generic:
+      - generic:
+        - button:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button:
+          - img
+      - generic:
+        - button:
+          - img
+    - generic:
+      - generic:
+        - generic: /agentation
+        - generic: v1.3.2
+        - button "Switch to light mode":
+          - img
+      - generic:
+        - generic:
+          - generic:
+            - text: Output Detail
+            - generic:
+              - img
+          - button "Standard":
+            - generic: Standard
+      - generic:
+        - generic: Marker Colour
+        - generic:
+          - generic:
+            - generic "Purple"
+          - generic:
+            - generic "Blue"
+          - generic:
+            - generic "Cyan"
+          - generic:
+            - generic "Green"
+          - generic:
+            - generic "Yellow"
+          - generic:
+            - generic "Orange"
+          - generic:
+            - generic "Red"
+      - generic:
+        - generic:
+          - checkbox "Clear after output"
+          - generic:
+            - text: Clear after output
+            - generic:
+              - img
+        - generic:
+          - checkbox "Block page interactions"
+          - generic: Block page interactions

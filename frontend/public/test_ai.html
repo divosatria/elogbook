@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test AI Prediksi Ikan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 { margin-top: 0; color: #333; }
+        .preview-box {
+            width: 100%;
+            height: 250px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #f8fafc;
+            position: relative;
+        }
+        .preview-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+        .preview-box span {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        input[type="file"] { display: none; }
+        .btn {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+        .btn:hover { background: #0284c7; }
+        .btn:disabled { background: #94a3b8; cursor: not-allowed; }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #ecfdf5;
+            color: #065f46;
+            display: none;
+            text-align: left;
+        }
+        .result h3 { margin: 0 0 10px 0; font-size: 18px; text-align: center; }
+        .result p { margin: 5px 0; font-size: 14px; }
+        
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>📸 Cek Jenis Ikan</h2>
+    
+    <div class="input-group">
+        <label>Token JWT (Wajib: Ambil dari Login Swagger)</label>
+        <input type="text" id="token" placeholder="Bearer eyJhbGciOiJIUzI1NiI...">
+    </div>
+
+    <label for="fileInput">
+        <div class="preview-box" id="dropZone">
+            <span id="placeholderText">Klik untuk pilih foto ikan</span>
+            <img id="preview" src="" alt="Preview">
+        </div>
+    </label>
+    <input type="file" id="fileInput" accept="image/*">
+
+    <button class="btn" id="predictBtn" disabled>Prediksi Sekarang 🚀</button>
+    
+    <div class="result" id="resultBox">
+        <h3 id="resName">Ikan Tuna</h3>
+        <p><strong>Akurasi:</strong> <span id="resScore">95.00</span>%</p>
+        <p><strong>Bantuan AI:</strong> <span id="resAI">Ya (OpenRouter)</span></p>
+    </div>
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+    const placeholderText = document.getElementById('placeholderText');
+    const predictBtn = document.getElementById('predictBtn');
+    const resultBox = document.getElementById('resultBox');
+    
+    let selectedFile = null;
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            selectedFile = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                preview.src = event.target.result;
+                preview.style.display = 'block';
+                placeholderText.style.display = 'none';
+                predictBtn.disabled = false;
+                resultBox.style.display = 'none';
+            };
+            reader.readAsDataURL(selectedFile);
+        }
+    });
+
+    predictBtn.addEventListener('click', async () => {
+        if (!selectedFile) return;
+        
+        const token = document.getElementById('token').value.trim();
+        if (!token) {
+            alert("Harap masukkan Token JWT terlebih dahulu! (Silakan login di Swagger UI dan copy tokennya)");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+
+        predictBtn.textContent = 'Memproses... ⏳';
+        predictBtn.disabled = true;
+
+        try {
+            const response = await fetch('http://localhost:5000/api/mobile/predict-fish', {
+                method: 'POST',
+                headers: {
+                    'Authorization': token.startsWith('Bearer') ? token : `Bearer ${token}`
+                },
+                body: formData
+            });
+
+            const json = await response.json();
+            
+            if (response.ok && json.success) {
+                document.getElementById('resName').textContent = json.data.best_display_name;
+                document.getElementById('resScore').textContent = json.data.best_percentage;
+                document.getElementById('resAI').textContent = json.data.openrouter_support ? '✅ Ya (Override by OpenRouter)' : '❌ Tidak (Hanya Model Lokal)';
+                
+                resultBox.style.background = json.data.is_unknown ? '#fef2f2' : '#ecfdf5';
+                resultBox.style.color = json.data.is_unknown ? '#991b1b' : '#065f46';
+                
+                resultBox.style.display = 'block';
+            } else {
+                alert('Gagal: ' + (json.message || 'Terjadi kesalahan. Pastikan token valid!'));
+            }
+        } catch (error) {
+            alert('Error saat menghubungi server. Pastikan Backend & AI berjalan, dan CORS mengizinkan koneksi ini.');
+        } finally {
+            predictBtn.textContent = 'Prediksi Sekarang 🚀';
+            predictBtn.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>
