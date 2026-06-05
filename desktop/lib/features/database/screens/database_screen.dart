@@ -51,7 +51,7 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
     
     final prov = context.read<LoraProvider>();
     final rows = await prov.queryDb(limit: _pageSize, offset: offset);
-    _dbPath ??= prov.dbPath;
+    _dbPath = prov.dbPath;
     
     if (mounted) {
       setState(() { _records = rows; _loading = false; });
@@ -169,42 +169,64 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
         _statChip('Unsynced', '${s?.unsyncedCount ?? 0}', AppColors.amber),
         const Spacer(),
         if (_dbPath != null)
-          InkWell(
-            onTap: () async {
-              final newPath = await FilePicker.getDirectoryPath(
-                dialogTitle: 'Pilih Folder untuk Database',
-              );
-              if (newPath != null && mounted) {
-                try {
-                  setState(() => _loading = true);
-                  await prov.changeDatabaseDirectory(newPath);
-                  await _load(offset: 0);
-                  if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Lokasi database berhasil dipindahkan!'),
-                      backgroundColor: AppColors.onlineBg,
-                    ));
+          Container(
+            constraints: const BoxConstraints(maxWidth: 350),
+            child: Tooltip(
+              message: 'Klik untuk memindahkan lokasi file database\nSaat ini: $_dbPath',
+              child: InkWell(
+                onTap: () async {
+                  final newPath = await FilePicker.getDirectoryPath(
+                    dialogTitle: 'Pilih Folder untuk Database',
+                  );
+                  if (newPath != null && mounted) {
+                    try {
+                      setState(() => _loading = true);
+                      await prov.changeDatabaseDirectory(newPath);
+                      await _load(offset: 0);
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Lokasi database berhasil dipindahkan!'),
+                          backgroundColor: AppColors.onlineBg,
+                        ));
+                      }
+                    } catch (e) {
+                      setState(() => _loading = false);
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Gagal memindah database: $e'),
+                          backgroundColor: AppColors.dangerBg,
+                        ));
+                      }
+                    }
                   }
-                } catch (e) {
-                  setState(() => _loading = false);
-                  if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Gagal memindah database: $e'),
-                      backgroundColor: AppColors.dangerBg,
-                    ));
-                  }
-                }
-              }
-            },
-            borderRadius: BorderRadius.circular(4),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-              child: Row(children: [
-                const Icon(Icons.drive_file_move_outline, size: 12, color: AppColors.blue),
-                const SizedBox(width: 4),
-                Text(_dbPath!,
-                    style: const TextStyle(fontSize: 10, color: AppColors.textMuted, fontFamily: 'monospace', decoration: TextDecoration.underline)),
-              ]),
+                },
+                borderRadius: BorderRadius.circular(6),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: AppColors.surface,
+                    border: Border.all(color: AppColors.blue.withValues(alpha: 0.5), width: 1),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.folder_open, size: 14, color: AppColors.blue),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                          _dbPath!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 11, color: AppColors.blue, fontWeight: FontWeight.w600, fontFamily: 'monospace'),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      const Icon(Icons.edit, size: 12, color: AppColors.blue),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
       ]),

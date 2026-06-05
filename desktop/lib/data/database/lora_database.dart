@@ -243,8 +243,15 @@ class LoraDatabase {
   }
 
   /// Pindah lokasi file database dan hapus dari lokasi lama
-  Future<void> changeDatabaseDirectory(String newDirPath) async {
+  Future<void> changeDatabaseDirectory(String chosenPath) async {
     final oldDirPath = await _getDbDirectory();
+    
+    // Pastikan selalu ada di dalam folder 'LoRaReceiver'
+    String newDirPath = chosenPath;
+    if (p.basename(chosenPath) != 'LoRaReceiver') {
+      newDirPath = p.join(chosenPath, 'LoRaReceiver');
+    }
+
     if (oldDirPath == newDirPath) return;
 
     final oldPath = p.join(oldDirPath, _dbName);
