@@ -4,7 +4,7 @@ import { Ship, MapPin, Activity, Wifi, WifiOff, Navigation, Clock, RefreshCw, Fi
 
 
 
-import RealTimeMonitoringMap from './RealTimeMonitoringMap';
+import RealTimeMonitoringMap from '@/features/monitoring/RealTimeMonitoringMap';
 import MonitoringErrorBoundary from '@/components/common/MonitoringErrorBoundary';
 import { monitoringService } from '@/services/monitoringService';
 import { socketService } from '@/services/socketService';
@@ -823,4 +823,5 @@ const StatCard = ({
 };
 
 export default MonitoringPage;
+
 

@@ -8,7 +8,7 @@ import { backendAPI } from '@/services/backendService';
 import { socketService } from '@/services/socketService';
 import { API_CONFIG, API_ENDPOINTS } from '@/config/urls';
 import { getVesselRequirements, validateTripRequirements } from '@/utils/vesselRequirements';
-import TripScheduleManagement from '@/features/TripScheduleManagement';
+import TripScheduleManagement from '@/features/trip/TripScheduleManagement';
 import useRole from '@/utils/useRole';
 
 interface TripManagementProps {
@@ -3087,4 +3087,5 @@ const TripManagement: React.FC<TripManagementProps> = ({ weather }) => {
 };
 
 export default TripManagement;
+
 

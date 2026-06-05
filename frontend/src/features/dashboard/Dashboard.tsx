@@ -17,7 +17,7 @@ import { getMaritimeBulletin } from '@/services/geminiService';
 import { backendAPI } from '@/services/backendService';
 import { socketService } from '@/services/socketService';
 import { realDataService } from '@/services/realDataService';
-import RealTimeMonitoringMap from './RealTimeMonitoringMap';
+import RealTimeMonitoringMap from '@/features/monitoring/RealTimeMonitoringMap';
 import { API_BASE_URL } from '@/config/api';
 import useRole from '@/utils/useRole';
 
@@ -1432,3 +1432,4 @@ const Dashboard: React.FC<DashboardProps> = ({ weather, vessels = [], activities
 };
 
 export default Dashboard;
+

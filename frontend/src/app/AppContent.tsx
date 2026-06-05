@@ -1,29 +1,29 @@
 ﻿import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
-import Login from '@/features/Login';
-import Dashboard from '@/features/Dashboard';
-import TripManagement from '@/features/TripManagement';
-import TripScheduleManagement from '@/features/TripScheduleManagement';
-import SOSAlerts from '@/features/SOSAlerts';
-import CatchHistory from '@/features/CatchHistory';
-import AccountManagement from '@/features/AccountManagement';
-import DataKapal from '@/features/DataKapal';
+import Login from '@/features/auth/Login';
+import Dashboard from '@/features/dashboard/Dashboard';
+import TripManagement from '@/features/trip/TripManagement';
+import TripScheduleManagement from '@/features/trip/TripScheduleManagement';
+import SOSAlerts from '@/features/sos/SOSAlerts';
+import CatchHistory from '@/features/catch/CatchHistory';
+import AccountManagement from '@/features/settings/AccountManagement';
+import DataKapal from '@/features/vessel/DataKapal';
 import FishermenManagement from '@/features/FishermenManagement';
 import DocumentManagement from '@/features/DocumentManagement';
-import DataMaster from '@/features/DataMaster';
-import Settings from '@/features/Settings';
-import HarborZones from '@/features/HarborZones';
-import DataPerangkat from '@/features/DataPerangkat';
+import DataMaster from '@/features/master/DataMaster';
+import Settings from '@/features/settings/Settings';
+import HarborZones from '@/features/master/HarborZones';
+import DataPerangkat from '@/features/master/DataPerangkat';
 import LeafletMap from '@/components/layout/LeafletMap';
-import CatchPolygonManagement from '@/features/CatchPolygonManagement';
-import MaritimeWeather from '@/features/MaritimeWeather';
-import VesselOperationalManagement from '@/features/VesselOperationalManagement';
-import MonitoringPage from '@/features/MonitoringPage';
+import CatchPolygonManagement from '@/features/catch/CatchPolygonManagement';
+import MaritimeWeather from '@/features/weather/MaritimeWeather';
+import VesselOperationalManagement from '@/features/vessel/VesselOperationalManagement';
+import MonitoringPage from '@/features/monitoring/MonitoringPage';
 import MapsBlockedNotification from '@/components/ui/MapsBlockedNotification';
-import ForgotPassword from '@/features/ForgotPassword';
-import ResetPassword from '@/features/ResetPassword';
-import RawData from '@/features/RawData';
+import ForgotPassword from '@/features/auth/ForgotPassword';
+import ResetPassword from '@/features/auth/ResetPassword';
+import RawData from '@/features/master/RawData';
 import { FISH_TYPES, USER_ROLES } from '../constants';
 import { realDataService } from '@/services/realDataService';
 import { backendAPI } from '@/services/backendService';
@@ -340,5 +340,6 @@ const AppContent: React.FC = () => {
 };
 
 export default AppContent;
+
 
 

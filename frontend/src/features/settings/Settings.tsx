@@ -2,10 +2,10 @@
 import { Save, Database, Bell, Shield, Globe, Smartphone, Mail, Key, Upload, Image, Fish, DollarSign, Settings as SettingsIcon, FileSignature } from 'lucide-react';
 
 import { sanitizeInput, escapeHtml } from '@/utils/security';
-import FishPriceSettings from './FishPriceSettings';
-import EmailSettings from './EmailSettings';
-import SignatureSettings from './SignatureSettings';
-import RoleAccessManager from './RoleAccessManager';
+import FishPriceSettings from '@/features/settings/FishPriceSettings';
+import EmailSettings from '@/features/settings/EmailSettings';
+import SignatureSettings from '@/features/settings/SignatureSettings';
+import RoleAccessManager from '@/features/settings/RoleAccessManager';
 
 interface AppSettings {
   systemName: string;
@@ -549,3 +549,5 @@ const Settings: React.FC = () => {
 };
 
 export default Settings;
+
+
