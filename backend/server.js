@@ -3,7 +3,7 @@ const http = require('http');
 const socketIO = require('socket.io');
 const os = require('os');
 const { connectDB, closeDB } = require('./src/config/database');
-const { initSocketService } = require('./src/services/socketService');
+const { initSocketService } = require('./src/services/core/socketService');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 

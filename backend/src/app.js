@@ -6,49 +6,49 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 require('dotenv').config();
 
-const errorHandler = require('./middleware/errorHandler');
-const { csrfProtection } = require('./middleware/csrf');
-const { productionSecurity } = require('./middleware/productionSecurity');
-const { authenticate } = require('./middleware/auth');
+const errorHandler = require('./middleware/core/errorHandler');
+const { csrfProtection } = require('./middleware/core/csrf');
+const { productionSecurity } = require('./middleware/core/productionSecurity');
+const { authenticate } = require('./middleware/auth/auth');
 const swaggerSetup = require('./config/swagger');
-const documentCleanupService = require('./services/documentCleanupService');
+const documentCleanupService = require('./services/core/documentCleanupService');
 
 // Import routes
-const authRoutes = require('./routes/auth');
-const dashboardRoutes = require('./routes/dashboard');
-const testRoutes = require('./routes/test');
-const nahkodaRoutes = require('./routes/nahkoda');
-const kapalRoutes = require('./routes/kapal');
-const tripRoutes = require('./routes/trip');
-const tripTaskRoutes = require('./routes/tripTask');
-const operationalTaskRoutes = require('./routes/operationalTaskRoutes');
-const weatherRoutes = require('./routes/weather');
-const emergencyRoutes = require('./routes/emergency');
-const reportRoutes = require('./routes/report');
-const userRoutes = require('./routes/user');
-const mobileRoutes = require('./routes/mobile');
-const mobileVesselRoutes = require('./routes/mobileVessel');
-const mobileCatchRoutes = require('./routes/mobileCatch');
-const mobileTripRoutes = require('./routes/mobileTrip');
-const profileDocumentRoutes = require('./routes/profileDocument');
-const storageDataRoutes = require('./routes/storageData');
-const adminTripRoutes = require('./routes/adminTrip');
-const adminRoutes = require('./routes/admin');
-const hasilTangkapRoutes = require('./routes/hasilTangkap');
-const catchPolygonRoutes = require('./routes/catchPolygon');
-const harborZonesRoutes = require('./routes/harborZones');
-const harborPOIsRoutes = require('./routes/harborPOIs');
-const fishPriceRoutes = require('./routes/fishPrice');
-const emailSettingsRoutes = require('./routes/emailSettings');
+const authRoutes = require('./routes/auth/auth');
+const dashboardRoutes = require('./routes/core/dashboard');
+const testRoutes = require('./routes/core/test');
+const nahkodaRoutes = require('./routes/vessel/nahkoda');
+const kapalRoutes = require('./routes/vessel/kapal');
+const tripRoutes = require('./routes/trip/trip');
+const tripTaskRoutes = require('./routes/trip/tripTask');
+const operationalTaskRoutes = require('./routes/core/operationalTaskRoutes');
+const weatherRoutes = require('./routes/core/weather');
+const emergencyRoutes = require('./routes/notification/emergency');
+const reportRoutes = require('./routes/core/report');
+const userRoutes = require('./routes/auth/user');
+const mobileRoutes = require('./routes/mobile/mobile');
+const mobileVesselRoutes = require('./routes/mobile/mobileVessel');
+const mobileCatchRoutes = require('./routes/mobile/mobileCatch');
+const mobileTripRoutes = require('./routes/mobile/mobileTrip');
+const profileDocumentRoutes = require('./routes/vessel/profileDocument');
+const storageDataRoutes = require('./routes/core/storageData');
+const adminTripRoutes = require('./routes/trip/adminTrip');
+const adminRoutes = require('./routes/core/admin');
+const hasilTangkapRoutes = require('./routes/trip/hasilTangkap');
+const catchPolygonRoutes = require('./routes/trip/catchPolygon');
+const harborZonesRoutes = require('./routes/monitoring/harborZones');
+const harborPOIsRoutes = require('./routes/monitoring/harborPOIs');
+const fishPriceRoutes = require('./routes/core/fishPrice');
+const emailSettingsRoutes = require('./routes/core/emailSettings');
 const csrfRoutes = require('./routes/csrf');
-const monitoringRoutes = require('./routes/monitoring');
-const crewRoutes = require('./routes/crew');
-const perangkatRoutes = require('./routes/perangkat');
-const testGPSRoutes = require('./routes/testGPS');
-const notificationRoutes = require('./routes/notifications');
-const fishingPointRoutes = require('./routes/fishingPoint');
-const rolePermissionsRoutes = require('./routes/rolePermissions');
-const edgeRoutes = require('./routes/edge');
+const monitoringRoutes = require('./routes/monitoring/monitoring');
+const crewRoutes = require('./routes/vessel/crew');
+const perangkatRoutes = require('./routes/monitoring/perangkat');
+const testGPSRoutes = require('./routes/core/testGPS');
+const notificationRoutes = require('./routes/notification/notifications');
+const fishingPointRoutes = require('./routes/monitoring/fishingPoint');
+const rolePermissionsRoutes = require('./routes/auth/rolePermissions');
+const edgeRoutes = require('./routes/monitoring/edge');
 
 const app = express();
 
@@ -476,7 +476,7 @@ app.get('/api/test-email-settings', async (req, res) => {
 // Test endpoint untuk GET email settings tanpa auth
 app.get('/api/test-get-email-settings', async (req, res) => {
   try {
-    const emailSettingController = require('./controllers/emailSettingController');
+    const emailSettingController = require('./controllers/core/emailSettingController');
     
     // Mock req object
     const mockReq = {
@@ -706,7 +706,7 @@ app.get('/api/test-add-sample-fuel/:vesselId', async (req, res) => {
 // Test endpoint untuk email notifications
 app.get('/api/test-email', async (req, res) => {
   try {
-    const emailService = require('./services/emailService');
+    const emailService = require('./services/core/emailService');
     
     // Test email data
     const testEmail = req.query.email || 'test@example.com';
@@ -747,7 +747,7 @@ app.get('/api/test-email', async (req, res) => {
 // Test endpoint untuk notifikasi trip assignment
 app.get('/api/test-trip-notification', async (req, res) => {
   try {
-    const { sendNotification } = require('./services/notificationService');
+    const { sendNotification } = require('./services/notification/notificationService');
     
     // Test notification data
     const testNotification = await sendNotification({
