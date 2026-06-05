@@ -172,6 +172,7 @@ logs/
 backup_*/
 data/
 !frontend/src/assets/data/
+!desktop/lib/data/
 *.json.backup
 test-results/
 
