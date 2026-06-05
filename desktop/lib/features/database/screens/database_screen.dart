@@ -35,18 +35,26 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
     final total = context.watch<LoraProvider>().stats?.totalPackets ?? 0;
     if (total != _lastTotal && _lastTotal != -1) {
       _lastTotal = total;
-      _load(offset: _offset);
+      _load(offset: _offset, silent: true);
     } else {
       _lastTotal = total;
     }
   }
 
-  Future<void> _load({int offset = 0}) async {
-    setState(() { _loading = true; _offset = offset; });
+  Future<void> _load({int offset = 0, bool silent = false}) async {
+    if (!silent) {
+      setState(() { _loading = true; _offset = offset; });
+    } else {
+      _offset = offset;
+    }
+    
     final prov = context.read<LoraProvider>();
     final rows = await prov.queryDb(limit: _pageSize, offset: offset);
     _dbPath ??= prov.dbPath;
-    setState(() { _records = rows; _loading = false; });
+    
+    if (mounted) {
+      setState(() { _records = rows; _loading = false; });
+    }
   }
 
   @override
