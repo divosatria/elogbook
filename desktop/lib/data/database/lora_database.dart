@@ -276,6 +276,16 @@ class LoraDatabase {
         }
       }
       await oldFile.delete();
+
+      // Hapus folder asalnya (beserta isinya jika ada file sisa)
+      try {
+        final oldDir = Directory(oldDirPath);
+        if (await oldDir.exists()) {
+          await oldDir.delete(recursive: true);
+        }
+      } catch (_) {
+        // Abaikan jika folder terkunci oleh sistem
+      }
     }
 
     // 3. Simpan ke preferensi
