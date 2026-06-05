@@ -16,7 +16,6 @@ const documentCleanupService = require('./services/core/documentCleanupService')
 // Import routes
 const authRoutes = require('./routes/auth/auth');
 const dashboardRoutes = require('./routes/core/dashboard');
-const testRoutes = require('./routes/core/test');
 const nahkodaRoutes = require('./routes/vessel/nahkoda');
 const kapalRoutes = require('./routes/vessel/kapal');
 const tripRoutes = require('./routes/trip/trip');
@@ -26,10 +25,14 @@ const weatherRoutes = require('./routes/core/weather');
 const emergencyRoutes = require('./routes/notification/emergency');
 const reportRoutes = require('./routes/core/report');
 const userRoutes = require('./routes/auth/user');
-const mobileRoutes = require('./routes/mobile/mobile');
 const mobileVesselRoutes = require('./routes/mobile/mobileVessel');
 const mobileCatchRoutes = require('./routes/mobile/mobileCatch');
 const mobileTripRoutes = require('./routes/mobile/mobileTrip');
+const mobileProfileRoutes = require('./routes/mobile/mobileProfile');
+const mobileEmergencyRoutes = require('./routes/mobile/mobileEmergency');
+const mobileDashboardRoutes = require('./routes/mobile/mobileDashboard');
+const mobileAuthRoutes = require('./routes/mobile/mobileAuth');
+const mobileAiRoutes = require('./routes/mobile/mobileAi');
 const profileDocumentRoutes = require('./routes/vessel/profileDocument');
 const storageDataRoutes = require('./routes/core/storageData');
 const adminTripRoutes = require('./routes/trip/adminTrip');
@@ -44,7 +47,6 @@ const csrfRoutes = require('./routes/csrf');
 const monitoringRoutes = require('./routes/monitoring/monitoring');
 const crewRoutes = require('./routes/vessel/crew');
 const perangkatRoutes = require('./routes/monitoring/perangkat');
-const testGPSRoutes = require('./routes/core/testGPS');
 const notificationRoutes = require('./routes/notification/notifications');
 const fishingPointRoutes = require('./routes/monitoring/fishingPoint');
 const rolePermissionsRoutes = require('./routes/auth/rolePermissions');
@@ -232,7 +234,6 @@ app.post('/api/debug-create-user', (req, res) => {
 } // end non-production guard
 
 app.use('/api/auth', authRoutes);
-app.use('/api/test', testRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
 // Test endpoints (non-production only)
@@ -592,7 +593,11 @@ app.use('/api/weather', weatherRoutes);
 app.use('/api/emergency', emergencyRoutes);
 app.use('/api/report', reportRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/mobile', mobileRoutes);
+app.use('/api/mobile', mobileAuthRoutes);
+app.use('/api/mobile', mobileProfileRoutes);
+app.use('/api/mobile', mobileEmergencyRoutes);
+app.use('/api/mobile', mobileDashboardRoutes);
+app.use('/api/mobile', mobileAiRoutes);
 app.use('/api/mobile/vessel', mobileVesselRoutes);
 app.use('/api/mobile/vessel', storageDataRoutes);
 app.use('/api/mobile/catches', mobileCatchRoutes);
@@ -614,7 +619,6 @@ app.use('/api/perangkat', perangkatRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/fishing-points', fishingPointRoutes);
 app.use('/api/role-permissions', rolePermissionsRoutes);
-app.use('/api', testGPSRoutes);
 app.use('/api/edge', edgeRoutes);
 
 // Health check
