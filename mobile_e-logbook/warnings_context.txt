@@ -1,0 +1,322 @@
+
+--- lib\screens\Login\login_screen.dart ---
+Lines 557-560:
+557: 
+558:         // Save login activity
+559:         await UserActivityService.saveLastLogin(user.email);
+560:         await UserActivityService.saveActivity(
+---
+Lines 558-561:
+558:         // Save login activity
+559:         await UserActivityService.saveLastLogin(user.email);
+560:         await UserActivityService.saveActivity(
+561:           userId: user.email,
+---
+Lines 583-586:
+583: 
+584:           Navigator.pushAndRemoveUntil(
+585:             context,
+586:             PageRouteBuilder(
+---
+
+--- lib\screens\crew\screens\create_catch_screen.dart ---
+Lines 577-580:
+577:         'catch_date': catchDateTime.toIso8601String(), // Tanggal & waktu pengambilan
+578:         'departure_date': _departureDate.toIso8601String().split('T')[0],
+579:         'departure_time': _departureTime.format(context),
+580:         'arrival_date': _arrivalDate.toIso8601String().split('T')[0],
+---
+Lines 579-582:
+579:         'departure_time': _departureTime.format(context),
+580:         'arrival_date': _arrivalDate.toIso8601String().split('T')[0],
+581:         'arrival_time': _arrivalTime.format(context),
+582:         'trip_duration_hours': _calculatedHours,
+---
+Lines 664-667:
+664:       debugPrint('📷 [CATCH] Image path: ${_catchImages[0].path}');
+665: 
+666:       final result = await CatchSubmissionService.submitCatch(
+667:         catchData: catchData,
+---
+
+--- lib\screens\crew\widgets\crew_floating_menu.dart ---
+Lines 221-224:
+221:     }
+222: 
+223:     final success = await showSosAlertDialog(context);
+224: 
+---
+
+--- lib\screens\crew\widgets\crew_tracking_button.dart ---
+Lines 307-310:
+307: 
+308:         // Cek apakah tracking sedang minimize
+309:         final minimizeProvider = Provider.of<TrackingMinimizeProvider>(context, listen: false);
+310:         if (minimizeProvider.isMinimized && minimizeProvider.isTracking) {
+---
+Lines 309-312:
+309:         final minimizeProvider = Provider.of<TrackingMinimizeProvider>(context, listen: false);
+310:         if (minimizeProvider.isMinimized && minimizeProvider.isTracking) {
+311:           _showAlreadyTrackingDialog(context);
+312:           return;
+---
+Lines 571-574:
+571: 
+572:     Navigator.pushReplacement(
+573:       context,
+574:       MaterialPageRoute(
+---
+Lines 610-613:
+610: 
+611:     Navigator.pushReplacement(
+612:       context,
+613:       MaterialPageRoute(
+---
+Lines 653-656:
+653: 
+654:     Navigator.pushReplacement(
+655:       context,
+656:       MaterialPageRoute(
+---
+
+--- lib\screens\documents\document_status_helper.dart ---
+Lines 29-32:
+29:     }
+30: 
+31:     NavigationHelper.pushNoTransition(context, screen);
+32:   }
+---
+
+--- lib\screens\documents\document_upload_stepper.dart ---
+Lines 198-201:
+198:           }
+199:         }
+200:         Navigator.pop(context);
+201:         return;
+---
+Lines 223-226:
+223:           }
+224:         }
+225:         Navigator.pop(context);
+226:       }
+---
+Lines 235-238:
+235:         }
+236:       }
+237:       Navigator.pop(context);
+238:     }
+---
+
+--- lib\screens\documents\widgets\ocr\ktp_scanner_screen.dart ---
+Lines 161-164:
+161: 
+162:       // Get screen dimensions
+163:       final screenWidth = MediaQuery.of(context).size.width;
+164:       final screenHeight = MediaQuery.of(context).size.height;
+---
+Lines 162-165:
+162:       // Get screen dimensions
+163:       final screenWidth = MediaQuery.of(context).size.width;
+164:       final screenHeight = MediaQuery.of(context).size.height;
+165: 
+---
+
+--- lib\screens\main_screen.dart ---
+Lines 589-592:
+589:                                         if (context.mounted) {
+590:                                           Navigator.pushAndRemoveUntil(
+591:                                             context,
+592:                                             PageRouteBuilder(
+---
+Lines 1201-1204:
+1201:           if (mounted) {
+1202:             showDialog(
+1203:               context: context,
+1204:               builder: (context) => AlertDialog(
+---
+Lines 1303-1306:
+1303:           // Gunakan named route dengan tripId
+1304:           Navigator.pushNamed(
+1305:             context,
+1306:             AppRoutes.createCatch,
+---
+Lines 1312-1315:
+1312:       print('❌ Error handling create catch: $e');
+1313:       if (mounted) {
+1314:         ScaffoldMessenger.of(context).showSnackBar(
+1315:           SnackBar(
+---
+
+--- lib\screens\nahkoda\widgets\nahkoda_floating_menu.dart ---
+Lines 137-140:
+137: 
+138:     // Show SOS dialog
+139:     final success = await showSosAlertDialog(context);
+140: 
+---
+
+--- lib\screens\nahkoda\widgets\nahkoda_tracking_button.dart ---
+Lines 691-694:
+691: 
+692:         // Cek apakah tracking sedang minimize
+693:         final minimizeProvider = Provider.of<TrackingMinimizeProvider>(context, listen: false);
+694:         if (minimizeProvider.isMinimized && minimizeProvider.isTracking) {
+---
+Lines 693-696:
+693:         final minimizeProvider = Provider.of<TrackingMinimizeProvider>(context, listen: false);
+694:         if (minimizeProvider.isMinimized && minimizeProvider.isTracking) {
+695:           _showAlreadyTrackingDialog(context);
+696:           return;
+---
+Lines 836-839:
+836: 
+837:     NahkodaRoutes.navigateToActiveTracking(
+838:       context,
+839:       vesselName: tripData['vesselName'] ?? 'Kapal',
+---
+Lines 893-896:
+893: 
+894:     Navigator.pushReplacement(
+895:       context,
+896:       MaterialPageRoute(
+---
+
+--- lib\screens\notification_screen.dart ---
+Lines 110-113:
+110:     try {
+111:       final prefs = await SharedPreferences.getInstance();
+112:       final token = await SecureStorageService.getToken();
+113:       final userDataString = prefs.getString('user_data');
+---
+Lines 167-170:
+167:   Future<void> _markNotificationAsRead(dynamic notificationId) async {
+168:     try {
+169:       final prefs = await SharedPreferences.getInstance();
+170:       final token = await SecureStorageService.getToken();
+---
+Lines 168-171:
+168:     try {
+169:       final prefs = await SharedPreferences.getInstance();
+170:       final token = await SecureStorageService.getToken();
+171:       if (token == null) return;
+---
+Lines 808-811:
+808: 
+809:     await _updateUnreadCounts();
+810:     ScaffoldMessenger.of(context).showSnackBar(
+811:       const SnackBar(
+---
+Lines 871-874:
+871:                   await _updateUnreadCounts();
+872:                   NavigationHelper.pushNamedNoTransition(
+873:                     context,
+874:                     '/notification-detail',
+---
+Lines 1070-1073:
+1070:                   if (_documentRequirements.isNotEmpty) {
+1071:                     NavigationHelper.pushNamedNoTransition(
+1072:                       context,
+1073:                       '/nahkoda-document-upload',
+---
+
+--- lib\screens\profile_screen.dart ---
+Lines 957-960:
+957:     if (shouldLogout == true) {
+958:       // Reset navigation ke home screen
+959:       Provider.of<NavigationProvider>(context, listen: false).resetToHome();
+960: 
+---
+
+--- lib\screens\schedules\trip_info_screen.dart ---
+Lines 667-670:
+667:     // Show loading
+668:     showDialog(
+669:       context: context,
+670:       barrierDismissible: false,
+---
+
+--- lib\screens\settings\account_info_screen.dart ---
+Lines 44-47:
+44:         final profileResult = await ProfileService.getProfile();
+45:         if (profileResult['success'] == true && profileResult['user'] != null) {
+46:           Provider.of<UserProvider>(context, listen: false).setUser(profileResult['user']);
+47:         }
+---
+Lines 46-49:
+46:           Provider.of<UserProvider>(context, listen: false).setUser(profileResult['user']);
+47:         }
+48:         ScaffoldMessenger.of(context).showSnackBar(
+49:           const SnackBar(content: Text('Alamat berhasil diperbarui'), backgroundColor: Colors.green),
+---
+
+--- lib\screens\tracking\pre_trip_form.dart ---
+Lines 1341-1344:
+1341:     if (result != null && result is Map<String, dynamic>) {
+1342:       setState(() => _fuelData = result);
+1343:       ScaffoldMessenger.of(context).showSnackBar(
+1344:         SnackBar(
+---
+Lines 1360-1363:
+1360:     if (result != null && result is Map<String, dynamic>) {
+1361:       setState(() => _iceData = result);
+1362:       ScaffoldMessenger.of(context).showSnackBar(
+1363:         SnackBar(
+---
+Lines 1381-1384:
+1381:         final file = result.files.single;
+1382:         if (file.size > 10 * 1024 * 1024) {
+1383:           ScaffoldMessenger.of(context).showSnackBar(
+1384:             SnackBar(
+---
+Lines 1396-1399:
+1396:       }
+1397:     } catch (e) {
+1398:       ScaffoldMessenger.of(context).showSnackBar(
+1399:         SnackBar(
+---
+Lines 1432-1435:
+1432:     });
+1433: 
+1434:     ScaffoldMessenger.of(context).showSnackBar(
+1435:       SnackBar(
+---
+Lines 1494-1497:
+1494:       });
+1495: 
+1496:       ScaffoldMessenger.of(context).showSnackBar(
+1497:         SnackBar(
+---
+Lines 1505-1508:
+1505:     } catch (e) {
+1506:       print('❌ Error uploading crew data: $e');
+1507:       ScaffoldMessenger.of(context).showSnackBar(
+1508:         SnackBar(
+---
+
+--- lib\screens\tracking\upload_fuel_screen.dart ---
+Lines 407-410:
+407:       }
+408:     } catch (e) {
+409:       ScaffoldMessenger.of(context).showSnackBar(
+410:         SnackBar(content: Text('Gagal mengambil foto'), backgroundColor: Colors.red),
+---
+Lines 424-427:
+424:       }
+425:     } catch (e) {
+426:       ScaffoldMessenger.of(context).showSnackBar(
+427:         SnackBar(content: Text('Gagal memilih foto'), backgroundColor: Colors.red),
+---
+
+--- lib\screens\tracking\upload_ice_screen.dart ---
+Lines 407-410:
+407:       }
+408:     } catch (e) {
+409:       ScaffoldMessenger.of(context).showSnackBar(
+410:         SnackBar(content: Text('Gagal mengambil foto'), backgroundColor: Colors.red),
+---
+Lines 424-427:
+424:       }
+425:     } catch (e) {
+426:       ScaffoldMessenger.of(context).showSnackBar(
+427:         SnackBar(content: Text('Gagal memilih foto'), backgroundColor: Colors.red),
+---

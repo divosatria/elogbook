@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:e_logbook/core/utils/data_encryption.dart';
+import 'package:e_logbook/utils/data_encryption.dart';
 
 void main() {
   group('DataEncryption Tests', () {

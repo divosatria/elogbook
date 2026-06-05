@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:e_logbook/core/utils/input_validator.dart';
+import 'package:e_logbook/utils/input_validator.dart';
 
 void main() {
   group('InputValidator Tests', () {
