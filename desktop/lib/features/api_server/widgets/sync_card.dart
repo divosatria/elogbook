@@ -267,8 +267,8 @@ class _SyncCardState extends State<SyncCard> {
     final result = await prov.syncToElogbook();
     if (!ctx.mounted) return;
     final msg = result.isSuccess
-        ? '\${result.pushed} paket berhasil dikirim'
-        : 'Gagal: \${result.errorMessage}';
+        ? '${result.pushed} paket berhasil dikirim'
+        : 'Gagal: ${result.errorMessage}';
     ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
       backgroundColor: result.isSuccess ? AppColors.onlineBg : AppColors.dangerBg,
       content: Text(msg,
@@ -278,7 +278,7 @@ class _SyncCardState extends State<SyncCard> {
   }
 
   String _formatTime(DateTime t) =>
-      '\${t.hour.toString().padLeft(2, '0')}:\${t.minute.toString().padLeft(2, '0')}:\${t.second.toString().padLeft(2, '0')}';
+      '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}:${t.second.toString().padLeft(2, '0')}';
 
   Widget _codeBlock(BuildContext context, String title, String code) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
