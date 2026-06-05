@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import '../../config/api_config.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import '../../services/local/secure_storage_service.dart';
 import '../../services/api/trip_service.dart';
 import '../../services/api/vessel_service.dart';
 import '../../services/nitification/local_notification_service.dart';
@@ -67,7 +68,7 @@ class _MySchedulesScreenState extends State<MySchedulesScreen> {
   Future<void> _checkNewTaskNotification() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       final userRole = prefs.getString('role');
       final userDataString = prefs.getString('user_data');
 

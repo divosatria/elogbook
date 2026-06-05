@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as http_parser;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import '../../services/local/secure_storage_service.dart';
 import '../../config/api_config.dart';
 
 class VesselService {
@@ -15,7 +16,7 @@ class VesselService {
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -62,7 +63,7 @@ class VesselService {
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -134,7 +135,7 @@ class VesselService {
     print('\n🔍 [VESSEL_SERVICE] getVesselDetail called');
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       final userDataString = prefs.getString('user_data');
 
       if (token == null || userDataString == null) {
@@ -263,7 +264,7 @@ class VesselService {
     print('\n🔍 [VESSEL_SERVICE] getVesselIdFromUserSettings called');
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       final userDataString = prefs.getString('user_data');
       
       if (token == null || userDataString == null) {
@@ -320,7 +321,7 @@ class VesselService {
     print('\n🔍 [VESSEL_SERVICE] getVesselIdFromTrip called');
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       final userDataString = prefs.getString('user_data');
       
       if (token == null || userDataString == null) {

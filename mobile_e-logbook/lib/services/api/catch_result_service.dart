@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/local/secure_storage_service.dart';
 import '../../config/api_config.dart';
 
 class CatchResultService {
@@ -19,7 +20,7 @@ class CatchResultService {
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');

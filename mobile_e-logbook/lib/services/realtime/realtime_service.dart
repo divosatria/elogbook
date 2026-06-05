@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/api_config.dart';
+import '../local/secure_storage_service.dart';
 
 class RealTimeService {
   static String get baseUrl => ApiConfig.baseUrl;
@@ -18,7 +19,7 @@ class RealTimeService {
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       
       await _dio.post(
         '$baseUrl/emergency/signal',
@@ -51,7 +52,7 @@ class RealTimeService {
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       
       await _dio.post(
         '$baseUrl/tracking/location',
@@ -78,7 +79,7 @@ class RealTimeService {
     _heartbeatTimer = Timer.periodic(Duration(seconds: 5), (timer) async {
       try {
         final prefs = await SharedPreferences.getInstance();
-        final token = prefs.getString('auth_token');
+        final token = await SecureStorageService.getToken();
         
         final response = await _dio.get(
           '$baseUrl/alerts/check',

@@ -4,7 +4,6 @@ import 'package:e_logbook/services/device/foreground_tracking_service.dart';
 import 'package:e_logbook/services/api/location_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// Service untuk tracking lokasi secara real-time saat trip aktif
 class LocationTrackingService {

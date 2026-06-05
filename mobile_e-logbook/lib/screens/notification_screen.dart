@@ -8,6 +8,7 @@ import '../models/document_requirement_model.dart';
 import '../provider/user_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/local/secure_storage_service.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../config/api_config.dart';
@@ -108,7 +109,7 @@ class _NotificationScreenState extends State<NotificationScreen>
   Future<List<Map<String, dynamic>>> _fetchTripNotificationsFromAPI() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       final userDataString = prefs.getString('user_data');
 
       if (token == null || userDataString == null) return [];
@@ -166,7 +167,7 @@ class _NotificationScreenState extends State<NotificationScreen>
   Future<void> _markNotificationAsRead(dynamic notificationId) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       if (token == null) return;
 
       await http.put(

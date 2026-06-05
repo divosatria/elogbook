@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
+import '../../services/local/secure_storage_service.dart';
 import 'vessel_service.dart';
 import '../../config/api_config.dart';
 
@@ -18,7 +19,7 @@ class SosService {
 
       // Get token
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan. Silakan login kembali.');
@@ -114,7 +115,7 @@ class SosService {
   static Future<List<Map<String, dynamic>>> getSosHistory() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');

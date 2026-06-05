@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import '../../services/local/secure_storage_service.dart';
 import '../api/vessel_service.dart';
 import '../api/document_service.dart';
 
@@ -106,7 +107,7 @@ class RealtimeUpdateService {
     print('\n🔄 [POLLING] Checking for updates...');
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
       
       if (token == null) {
         print('❌ [POLLING] No auth token found');

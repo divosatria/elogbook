@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/user_model.dart';
 import '../nitification/admin_notification_service.dart';
 import 'package:flutter/material.dart';
+import '../../services/local/secure_storage_service.dart';
 import '../../utils/account_status_interceptor.dart';
 import '../../utils/token_interceptor.dart';
 import '../../config/api_config.dart';
@@ -47,7 +47,7 @@ class AuthService {
 
   static Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('auth_token');
+    return await SecureStorageService.getToken();
   }
 
   static Future<void> saveToken(String token) async {

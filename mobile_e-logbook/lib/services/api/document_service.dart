@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/local/secure_storage_service.dart';
 import 'dart:io';
 import '../../config/api_config.dart';
 
@@ -21,7 +22,7 @@ class DocumentService {
 
   static Future<String?> _getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('auth_token');
+    return await SecureStorageService.getToken();
   }
 
   static Future<Map<String, dynamic>> uploadDocument({

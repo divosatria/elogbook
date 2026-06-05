@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
+import '../../services/local/secure_storage_service.dart';
 import '../../config/api_config.dart';
 
 class LocationService {
@@ -16,7 +17,7 @@ class LocationService {
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -66,7 +67,7 @@ class LocationService {
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');

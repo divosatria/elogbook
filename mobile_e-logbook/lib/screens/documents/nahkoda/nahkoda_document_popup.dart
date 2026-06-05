@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:e_logbook/utils/responsive_helper.dart';
 import 'package:lottie/lottie.dart';
-import 'dart:ui';
 
 
 class NahkodaDocumentPopup extends StatefulWidget {

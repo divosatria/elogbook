@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as http_parser;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/local/secure_storage_service.dart';
 import '../../config/api_config.dart';
 
 class TokenExpiredException implements Exception {
@@ -23,7 +24,7 @@ class TripService {
       print('\n========== GET ALL TRIPS START ==========');
       
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -70,7 +71,7 @@ class TripService {
       print('🔍 [TRIP] Trip ID: $tripId');
       
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -122,7 +123,7 @@ class TripService {
       print('📤 [DOC] Keterangan: ${keterangan ?? "(kosong)"}');
 
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -199,7 +200,7 @@ class TripService {
       print('🔍 [DOC] Trip ID: $tripId');
       
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -263,7 +264,7 @@ class TripService {
       print('📤 [FUEL] Bukti: ${buktiFilePath ?? "(tidak ada)"}');
 
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -364,7 +365,7 @@ class TripService {
       print('📤 [ICE] Bukti: ${buktiFilePath ?? "(tidak ada)"}');
 
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -447,7 +448,7 @@ class TripService {
       print('🔍 [OPERATIONAL] Trip ID: $tripId');
       
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -492,7 +493,7 @@ class TripService {
       print('🔄 [STATUS] New Status: $status');
       
       final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');

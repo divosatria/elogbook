@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
+import '../services/local/secure_storage_service.dart';
 import 'dart:convert';
 import 'dart:async';
 import '../models/user_model.dart';
@@ -28,7 +29,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<String?> _getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('auth_token');
+    return await SecureStorageService.getToken();
   }
 
   @override
@@ -39,7 +40,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> loadUserFromStorage() async {
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('auth_token');
+    final token = await SecureStorageService.getToken();
     final userData = prefs.getString('user_data');
 
     if (token != null && userData != null) {

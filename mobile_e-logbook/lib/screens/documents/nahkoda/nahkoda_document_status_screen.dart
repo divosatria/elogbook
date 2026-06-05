@@ -2,7 +2,6 @@
 
 import 'package:e_logbook/services/api/document_service.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui';
 
 class NahkodaDocumentStatusScreen extends StatefulWidget {
   const NahkodaDocumentStatusScreen({Key? key}) : super(key: key);

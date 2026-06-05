@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/catch_polygon_model.dart';
 import '../../models/harbor_zone_model.dart';
 import '../../config/api_config.dart';
+import '../local/secure_storage_service.dart';
 
 class ZoneService {
   static String get baseUrl => ApiConfig.baseUrl;
@@ -13,8 +13,7 @@ class ZoneService {
     try {
       print('\n========== GET CATCH POLYGONS START ==========');
       
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -115,8 +114,7 @@ class ZoneService {
     try {
       print('\n========== GET HARBOR ZONES START ==========');
       
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');
@@ -181,8 +179,7 @@ class ZoneService {
     try {
       print('\n========== GET HARBOR POIs START ==========');
       
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('auth_token');
+      final token = await SecureStorageService.getToken();
 
       if (token == null) {
         throw Exception('Token tidak ditemukan');

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/local/secure_storage_service.dart';
 import '../../config/api_config.dart';
 
 class DashboardService {
@@ -63,7 +64,7 @@ class DashboardService {
 
   static Future<String?> _getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('auth_token');
+    return await SecureStorageService.getToken();
   }
 
   static Map<String, dynamic> _handleError(DioException e) {
