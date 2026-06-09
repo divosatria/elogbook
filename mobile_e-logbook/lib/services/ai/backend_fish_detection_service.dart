@@ -86,9 +86,7 @@ class BackendFishDetectionService {
         int quantity = (fishData['estimatedQuantity'] ?? 1).toInt();
         String fishName = fishData['fishName'] ?? 'Ikan Tidak Teridentifikasi';
         
-        // Since we import gemini_fish_detection_service, we can't directly use its private 
-        // method _validateAndNormalizeWeight. But wait, if the backend returns the correct weight,
-        // we might not even need it. Let's just use what the backend gives.
+        // Let's just use what the backend gives.
         double unitWeight = rawWeight / quantity;
 
         debugPrint('========== BACKEND AI DETECTION SUCCESS ==========\n');

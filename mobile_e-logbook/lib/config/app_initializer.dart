@@ -26,15 +26,6 @@ class AppInitializer {
       // Validate and log API keys
       debugPrint('\n🔐 ========== API KEYS VALIDATION ==========');
       
-      // Gemini API
-      if (ApiConfig.geminiApiKey.isEmpty) {
-        debugPrint('⚠️ Gemini API Key: NOT CONFIGURED');
-        debugPrint('⚠️ Generate key di: https://aistudio.google.com/app/apikey');
-      } else {
-        debugPrint('✅ Gemini API Key: ${ApiConfig.geminiApiKey.substring(0, 10)}...${ApiConfig.geminiApiKey.substring(ApiConfig.geminiApiKey.length - 4)}');
-        debugPrint('✅ Gemini Model: ${ApiConfig.geminiModel}');
-      }
-      
       // Google Maps API
       if (ApiConfig.googleMapsApiKey.isEmpty) {
         debugPrint('⚠️ Google Maps API Key: NOT CONFIGURED');
