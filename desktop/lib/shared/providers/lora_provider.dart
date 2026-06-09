@@ -75,8 +75,12 @@ class LoraProvider extends ChangeNotifier {
   // ── Serial ────────────────────────────────────────────────────────────────
   void refreshPorts() {
     availPorts = LoraSerialService.availablePorts();
-    if (availPorts.isNotEmpty && selectedPort == null) {
-      selectedPort = availPorts.first;
+    if (availPorts.isNotEmpty) {
+      if (selectedPort == null || !availPorts.contains(selectedPort)) {
+        selectedPort = availPorts.first;
+      }
+    } else {
+      selectedPort = null;
     }
     notifyListeners();
   }

@@ -307,56 +307,15 @@ def predict():
         openrouter_res = None
 
         # 2. Cek apakah perlu bantuan OpenRouter
-        if local_confidence < OPENROUTER_THRESHOLD:
-            # Confidence rendah → minta OpenRouter untuk validasi/koreksi
-            logging.info(
-                f"Confidence lokal {local_confidence:.1f}% < threshold {OPENROUTER_THRESHOLD}% → memanggil OpenRouter..."
-            )
-            
-            top_k = []
-            if model_results and "predictions" in model_results[0]:
-                top_k = [p["class_name"] for p in model_results[0]["predictions"]]
-            
-            openrouter_res = call_openrouter_vision(image_bytes, top_k)
-            
-            if "error" not in openrouter_res and "class" in openrouter_res:
-                or_class = openrouter_res["class"]
-                if or_class in FAMILY_TO_LOCAL or or_class == "unknown":
-                    if or_class != final_result["best_class"]:
-                        logging.info(f"OpenRouter override: {final_result['best_class']} -> {or_class}")
-                        final_result["best_class"] = or_class
-                        if or_class == "unknown":
-                            final_result["best_display_name"] = "unknown"
-                            final_result["is_unknown"] = True
-                        else:
-                            final_result["best_display_name"] = FAMILY_TO_LOCAL[or_class]
-                            final_result["is_unknown"] = False
-                        
-                        if "confidence" in openrouter_res:
-                            final_result["confidence"] = float(openrouter_res["confidence"])
-                            final_result["best_percentage"] = round(float(openrouter_res["confidence"]) * 100, 2)
-                            
-                    final_result["openrouter_support"] = True
-                    final_result["decision_reason"] = f"Confidence lokal ({local_confidence:.1f}%) di bawah threshold ({OPENROUTER_THRESHOLD}%), menggunakan OpenRouter untuk validasi"
-                else:
-                    final_result["openrouter_support"] = False
-                    final_result["decision_reason"] = f"OpenRouter mengembalikan kelas tidak dikenal: {or_class}"
-            else:
-                final_result["openrouter_support"] = False
-                final_result["decision_reason"] = f"OpenRouter gagal: {openrouter_res.get('error', 'unknown error')}"
-        else:
-            # Confidence tinggi → cukup pakai model lokal saja
-            logging.info(
-                f"Confidence lokal {local_confidence:.1f}% >= threshold {OPENROUTER_THRESHOLD}% → cukup pakai model lokal"
-            )
-            final_result["openrouter_support"] = False
-            final_result["decision_reason"] = f"Confidence lokal ({local_confidence:.1f}%) sudah di atas threshold ({OPENROUTER_THRESHOLD}%), tidak perlu OpenRouter"
+        # OpenRouter call dipindahkan ke API Gateway (Node.js) untuk performa I/O
+        final_result["openrouter_support"] = False
+        final_result["decision_reason"] = f"Confidence lokal: {local_confidence:.1f}%"
 
         return jsonify({
             "success": True,
             "data": final_result,
             "models": model_results,
-            "openrouter_raw": openrouter_res
+            "openrouter_raw": None
         })
 
     except Exception as exc:

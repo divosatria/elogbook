@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
@@ -56,19 +57,35 @@ class LoraSerialService {
   }
 
   void _onData(Uint8List bytes) {
-    _buffer += utf8.decode(bytes, allowMalformed: true);
+    final decoded = utf8.decode(bytes, allowMalformed: true);
+    print('[Serial] Received ${bytes.length} bytes: $bytes (Decoded: "$decoded")');
+    try {
+      File('serial_log.txt').writeAsStringSync(decoded, mode: FileMode.append);
+    } catch (_) {}
+    
+    _buffer += decoded;
+    _buffer = _buffer.replaceAll('\r', '\n'); // Normalize enter
+    
     int nl;
     while ((nl = _buffer.indexOf('\n')) != -1) {
       final line = _buffer.substring(0, nl).trim();
       _buffer = _buffer.substring(nl + 1);
       if (line.isEmpty) continue;
+      
+      print('[Serial] Line Complete: $line');
       _packetCtrl.add(_parseLine(line));
     }
   }
 
   LoraRecord _parseLine(String line) {
     try {
-      final j = jsonDecode(line) as Map<String, dynamic>;
+      String jsonStr = line;
+      final startIdx = line.indexOf('{');
+      if (startIdx != -1) {
+        jsonStr = line.substring(startIdx);
+      }
+      print('[Serial] Attempting to parse JSON: $jsonStr');
+      final j = jsonDecode(jsonStr) as Map<String, dynamic>;
       final t = j['type'] as String? ?? 'unknown';
 
       // Payload bisa nested di field 'data' sebagai JSON string,
