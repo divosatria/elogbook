@@ -1,0 +1,14 @@
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":29.1,"suhu_kelembaban":87.8,"berat":14.5,"interval":5,"jenis_ikan":"Ikan E","id_ikan":167}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":29.1,"suhu_kelembaban":93.6,"berat":25.7,"interval":5,"jenis_ikan":"Ikan D","id_ikan":168}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":26.2,"suhu_kelembaban":88.3,"berat":6.3,"interval":5,"jenis_ikan":"Ikan C","id_ikan":169}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":29.5,"suhu_kelembaban":81.5,"berat":19.7,"interval":5,"jenis_ikan":"Ikan E","id_ikan":170}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":29.4,"suhu_kelembaban":81.7,"berat":14.8,"interval":5,"jenis_ikan":"Ikan B","id_ikan":171}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":28.1,"suhu_kelembaban":83.1,"berat":19.5,"interval":5,"jenis_ikan":"Ikan B","id_ikan":172}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":27.2,"suhu_kelembaban":91.3,"berat":17.1,"interval":5,"jenis_ikan":"Ikan D","id_ikan":173}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":27.1,"suhu_kelembaban":87.2,"berat":18.8,"interval":5,"jenis_ikan":"Ikan A","id_ikan":174}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":28.2,"suhu_kelembaban":90.2,"berat":20.2,"interval":5,"jenis_ikan":"Ikan B","id_ikan":175}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":28.7,"suhu_kelembaban":82,"berat":27.8,"interval":5,"jenis_ikan":"Ikan A","id_ikan":176}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":29.2,"suhu_kelembaban":93.8,"berat":41.7,"interval":5,"jenis_ikan":"Ikan A","id_ikan":177}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":28.6,"suhu_kelembaban":84.1,"berat":45.9,"interval":5,"jenis_ikan":"Ikan B","id_ikan":178}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":29.1,"suhu_kelembaban":87.3,"berat":6.4,"interval":5,"jenis_ikan":"Ikan C","id_ikan":179}}
+{"type":"rx","data":{"trail":"TRL-PLB-07","lat":-7.1853,"lng":106.4521,"suhu_air":29.8,"suhu_kelembaban":93.3,"berat":17.7,"interval":5,"jenis_ikan":"Ikan A","id_ikan":180}}

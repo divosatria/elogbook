@@ -66,7 +66,7 @@ const limiter = rateLimit({
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // 5 attempts per window
+  max: 30, // Ditingkatkan dari 5 ke 30 untuk menghindari mass-blocking (NAT Pelabuhan)
   message: { error: 'Too many login attempts, please try again later.' },
   skipSuccessfulRequests: true
 });
@@ -591,8 +591,14 @@ app.use('/api/trip-tasks', tripTaskRoutes);
 app.use('/api/operational-tasks', operationalTaskRoutes);
 app.use('/api/weather', weatherRoutes);
 app.use('/api/emergency', emergencyRoutes);
+const { checkMobileApiKey } = require('./middleware/auth/mobileApiKey');
+
 app.use('/api/report', reportRoutes);
 app.use('/api/users', userRoutes);
+
+// Proteksi API Key untuk semua endpoints mobile
+app.use('/api/mobile', checkMobileApiKey);
+
 app.use('/api/mobile', mobileAuthRoutes);
 app.use('/api/mobile', mobileProfileRoutes);
 app.use('/api/mobile', mobileEmergencyRoutes);
