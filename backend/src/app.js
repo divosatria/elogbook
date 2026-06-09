@@ -627,9 +627,13 @@ app.use('/api/fishing-points', fishingPointRoutes);
 app.use('/api/role-permissions', rolePermissionsRoutes);
 app.use('/api/edge', edgeRoutes);
 
-// Health check
+// Health check endpoints
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Server is running' });
+  res.status(200).json({ status: 'ok', timestamp: new Date() });
+});
+
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date() });
 });
 
 // Test mobile dashboard endpoint
