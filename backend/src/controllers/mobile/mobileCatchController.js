@@ -116,7 +116,7 @@ const mobileCatchController = {
       // Handle photo upload
       let photoPath = null;
       if (req.file) {
-        const uploadResult = await uploadHelper.saveFile(req.file.buffer, req.file.originalname, `catches/${kapalId}`);
+        const uploadResult = await uploadHelper.saveFile((req.file.buffer || req.file.path), req.file.originalname, `catches/${kapalId}`);
         photoPath = uploadResult.filePath;
       }
 

@@ -56,7 +56,7 @@ exports.updateProfile = async (req, res) => {
       // Save new photo
       const fileName = `${userId}-${Date.now()}${path.extname(req.file.originalname)}`;
       const filePath = path.join(uploadDir, fileName);
-      fs.writeFileSync(filePath, req.file.buffer);
+      fs.writeFileSync(filePath, (req.file.buffer || req.file.path));
 
       updateData.foto = fileName;
     }

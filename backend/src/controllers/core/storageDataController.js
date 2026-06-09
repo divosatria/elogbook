@@ -18,7 +18,7 @@ const storageDataController = {
 
       let fotoPath = null;
       if (req.file) {
-        const uploadResult = await uploadHelper.saveFile(req.file.buffer, req.file.originalname, `storage/${kapalId}`);
+        const uploadResult = await uploadHelper.saveFile((req.file.buffer || req.file.path), req.file.originalname, `storage/${kapalId}`);
         fotoPath = uploadResult.filePath;
       }
 

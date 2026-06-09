@@ -7,7 +7,7 @@ const uploadHelper = require('../../utils/uploadHelper');
 const { sanitizeString } = require('../../middleware/vessel/vesselValidation');
 
 // Configure multer
-const storage = multer.memoryStorage();
+const storage = multer.diskStorage({ destination: (req, file, cb) => { const fs = require("fs"); const dir = "uploads/temp"; if (!fs.existsSync(dir)) fs.mkdirSync(dir, {recursive:true}); cb(null, dir); }, filename: (req, file, cb) => { cb(null, Date.now() + "-" + Math.round(Math.random() * 1E9) + "-" + file.originalname.replace(/\s+/g, "_")); } });
 const upload = multer({ 
   storage: storage,
   limits: { fileSize: 10 * 1024 * 1024 },
@@ -106,7 +106,7 @@ exports.uploadProfileDocument = async (req, res) => {
 
     // Save file to disk
     const fileInfo = await uploadHelper.saveFile(
-      req.file.buffer, 
+      (req.file.buffer || req.file.path), 
       req.file.originalname,
       `profile-documents/${userId}`
     );
@@ -765,7 +765,7 @@ exports.updateProfile = async (req, res) => {
 
       // Save new photo
       const fileInfo = await uploadHelper.saveFile(
-        req.file.buffer, 
+        (req.file.buffer || req.file.path), 
         req.file.originalname,
         `profile-photos/${userId}`
       );

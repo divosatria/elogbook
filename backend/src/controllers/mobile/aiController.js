@@ -13,7 +13,7 @@ const aiController = {
 
       // Memanggil service hybrid (Lokal -> Threshold -> OpenRouter)
       const result = await aiService.detectFish(
-        req.file.buffer, 
+        (req.file.buffer || req.file.path), 
         req.file.originalname, 
         req.file.mimetype
       );

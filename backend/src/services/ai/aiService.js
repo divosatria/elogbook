@@ -1,6 +1,7 @@
 
 const axios = require('axios');
 const FormData = require('form-data');
+const fs = require('fs');
 
 const FAMILY_TO_LOCAL = {
   "Carangidae": "Bawal Hitam / Layang / Selar",
@@ -38,10 +39,20 @@ class AIService {
     this.timeout = parseInt(process.env.OPENROUTER_TIMEOUT || 15000);
   }
 
+  // Helper untuk membaca file aman (Buffer atau Path)
+  async getFileBuffer(bufferOrPath) {
+    if (typeof bufferOrPath === 'string') {
+        return fs.promises.readFile(bufferOrPath);
+    }
+    return bufferOrPath;
+  }
+
   // 1. Panggil Model Lokal (Flask - PyTorch)
-  async localDetection(fileBuffer, filename, mimetype) {
+  async localDetection(fileData, filename, mimetype) {
     const formData = new FormData();
-    formData.append('image', fileBuffer, { filename, contentType: mimetype });
+    const actualBuffer = await this.getFileBuffer(fileData);
+    
+    formData.append('image', actualBuffer, { filename, contentType: mimetype });
 
     const response = await axios.post(this.flaskUrl, formData, {
       headers: formData.getHeaders(),
@@ -54,11 +65,11 @@ class AIService {
   }
 
   // 2. Panggil OpenRouter jika confidence lokal rendah
-  async openRouterDetection(fileBuffer, localResult) {
-    const base64Image = fileBuffer.toString('base64');
-    const topK = localResult.models?.[0]?.predictions?.map(p => p.class_name).join(', ') || 'tidak ada';
+  async openRouterDetection(fileData, localResult) {
+    const actualBuffer = await this.getFileBuffer(fileData);
+    const base64Image = actualBuffer.toString('base64');
     
-    // Konversi daftar famili ke string
+    const topK = localResult.models?.[0]?.predictions?.map(p => p.class_name).join(', ') || 'tidak ada';
     const validClasses = Object.entries(FAMILY_TO_LOCAL).map(([k, v]) => `'${k}' (${v})`).join(', ');
 
     const prompt = `Anda adalah ahli biologi kelautan profesional. Analisis gambar ikan ini secara teliti.
@@ -95,14 +106,24 @@ Dilarang menyertakan teks lain selain JSON!`;
   }
 
   // LOGIKA UTAMA: Hybrid Threshold
-  async detectFish(fileBuffer, filename, mimetype) {
+  async detectFish(fileData, filename, mimetype) {
     console.log("🤖 [AI Service] Menjalankan Deteksi Lokal (Flask)...");
-    const flaskResponse = await this.localDetection(fileBuffer, filename, mimetype);
+    const flaskResponse = await this.localDetection(fileData, filename, mimetype);
     const localData = flaskResponse.data;
     const confidence = parseFloat(localData.best_percentage || 0);
 
+    // Cleanup temp file (jika menggunakan diskStorage) SETELAH proses selesai
+    const cleanupTempFile = () => {
+        if (typeof fileData === 'string') {
+            fs.unlink(fileData, (err) => {
+                if (err && err.code !== 'ENOENT') console.warn("Temp file cleanup failed:", err.message);
+            });
+        }
+    };
+
     if (confidence >= this.threshold || localData.is_unknown) {
       console.log(`✅ [AI Service] Confidence Tinggi (${confidence}%). Menggunakan hasil lokal.`);
+      cleanupTempFile();
       return {
         ...localData,
         source: "local",
@@ -113,12 +134,13 @@ Dilarang menyertakan teks lain selain JSON!`;
 
     if (!this.openRouterKey) {
         console.warn(`⚠️ [AI Service] Confidence Rendah (${confidence}%) tapi API Key OpenRouter kosong. Fallback ke lokal.`);
+        cleanupTempFile();
         return { ...localData, source: "local", fishName: localData.best_display_name };
     }
 
     console.log(`☁️ [AI Service] Confidence Rendah (${confidence}%). Memanggil OpenRouter...`);
     try {
-        const cloudResult = await this.openRouterDetection(fileBuffer, flaskResponse);
+        const cloudResult = await this.openRouterDetection(fileData, flaskResponse);
         console.log(`☁️ [AI Service] OpenRouter Result:`, cloudResult);
         
         let finalClass = cloudResult.class;
@@ -127,10 +149,10 @@ Dilarang menyertakan teks lain selain JSON!`;
         if (finalClass !== 'unknown' && FAMILY_TO_LOCAL[finalClass]) {
            displayName = FAMILY_TO_LOCAL[finalClass];
         } else if (finalClass !== 'unknown') {
-           // Fallback jika OpenRouter menjawab famili yang tidak ada di daftar
            displayName = finalClass; 
         }
 
+        cleanupTempFile();
         return {
             ...localData,
             best_class: finalClass,
@@ -143,6 +165,7 @@ Dilarang menyertakan teks lain selain JSON!`;
         };
     } catch (error) {
         console.error("❌ [AI Service] OpenRouter Gagal, Fallback ke Lokal:", error.message);
+        cleanupTempFile();
         return {
             ...localData,
             source: "local_fallback",

@@ -27,7 +27,7 @@ class UploadHelper {
     return `${timestamp}-${hash}${ext}`;
   }
 
-  async saveFile(buffer, originalName, subfolder = '') {
+  async saveFile(bufferOrPath, originalName, subfolder = '') {
     await this.ensureUploadDir();
     
     const fileName = this.generateFileName(originalName);
@@ -40,7 +40,15 @@ class UploadHelper {
     }
     
     const filePath = path.join(targetDir, fileName);
-    await fs.writeFile(filePath, buffer);
+    
+    if (typeof bufferOrPath === 'string') {
+      // It's a file path (diskStorage)
+      await fs.copyFile(bufferOrPath, filePath);
+      await fs.unlink(bufferOrPath).catch(e => console.warn('Temp file cleanup warning:', e.message));
+    } else {
+      // It's a buffer (memoryStorage)
+      await fs.writeFile(filePath, bufferOrPath);
+    }
     
     return {
       fileName,
