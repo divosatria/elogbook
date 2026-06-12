@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Database, Search, RefreshCw, AlertCircle, FileText, Download } from 'lucide-react';
 import { backendAPI } from '@/services/backendService';
 import { socketService } from '@/services/socketService';
@@ -136,7 +136,10 @@ const RawData: React.FC = () => {
   const formatDate = (dateString: string) => {
     if (!dateString) return '-';
     try {
-      const d = new Date(dateString);
+      // Hilangkan huruf 'Z' di akhir string jika ada agar JS tidak otomatis 
+      // menambahkan +7 jam (menganggap data dari server sudah dalam waktu lokal/WIB)
+      const localString = dateString.endsWith('Z') ? dateString.slice(0, -1) : dateString;
+      const d = new Date(localString);
       return d.toLocaleString('id-ID', {
         year: 'numeric',
         month: 'short',

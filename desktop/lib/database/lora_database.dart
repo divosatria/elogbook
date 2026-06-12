@@ -115,6 +115,28 @@ class LoraDatabase {
     return record.copyWith(id: id);
   }
 
+  /// Simpan banyak paket sekaligus (Batch Insert)
+  Future<int> insertBatch(List<LoraRecord> records) async {
+    if (records.isEmpty) return 0;
+    final db = await database;
+    int inserted = 0;
+    await db.transaction((txn) async {
+      final batch = txn.batch();
+      for (final record in records) {
+        batch.insert(
+          _table,
+          record.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.ignore,
+        );
+      }
+      final results = await batch.commit(continueOnError: true);
+      for (final r in results) {
+        if (r != null) inserted++;
+      }
+    });
+    return inserted;
+  }
+
   /// Ambil semua paket (terbaru di atas), dengan filter opsional
   Future<List<LoraRecord>> getAll({
     int limit = 200,

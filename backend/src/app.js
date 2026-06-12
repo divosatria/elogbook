@@ -51,6 +51,7 @@ const notificationRoutes = require('./routes/notification/notifications');
 const fishingPointRoutes = require('./routes/monitoring/fishingPoint');
 const rolePermissionsRoutes = require('./routes/auth/rolePermissions');
 const edgeRoutes = require('./routes/monitoring/edge');
+const desktopSyncRoutes = require('./routes/sync/desktopSync');
 
 const app = express();
 
@@ -626,6 +627,7 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/fishing-points', fishingPointRoutes);
 app.use('/api/role-permissions', rolePermissionsRoutes);
 app.use('/api/edge', edgeRoutes);
+app.use('/api/edge/sync', desktopSyncRoutes);
 
 // Health check endpoints
 app.get('/health', (req, res) => {
