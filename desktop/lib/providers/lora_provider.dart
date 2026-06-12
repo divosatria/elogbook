@@ -120,8 +120,9 @@ class LoraProvider extends ChangeNotifier {
     bool ascending = false,
     bool unsyncedOnly = false,
     String? searchQuery,
+    String? sourceFilter,
   }) =>
-      _db.getAll(limit: limit, offset: offset, type: type, from: from, to: to, ascending: ascending, unsyncedOnly: unsyncedOnly, searchQuery: searchQuery);
+      _db.getAll(limit: limit, offset: offset, type: type, from: from, to: to, ascending: ascending, unsyncedOnly: unsyncedOnly, searchQuery: searchQuery, sourceFilter: sourceFilter);
 
   Future<void> clearDb() async {
     await _db.clearAll();
@@ -277,6 +278,13 @@ class LoraProvider extends ChangeNotifier {
 
   Future<SyncResult> syncToElogbook() async {
     final result = await sync.syncNow();
+    await _refreshStats();
+    notifyListeners();
+    return result;
+  }
+
+  Future<SyncResult> forceSyncByDate(DateTime date) async {
+    final result = await sync.forceSyncByDate(date);
     await _refreshStats();
     notifyListeners();
     return result;

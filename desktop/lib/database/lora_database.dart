@@ -7,7 +7,7 @@ import '../models/lora_record.dart';
 
 class LoraDatabase {
   static const _dbName = 'lora_receiver.db';
-  static const _dbVersion = 3;
+  static const _dbVersion = 4;
   static const _table = 'lora_packets';
 
   static LoraDatabase? _instance;
@@ -65,7 +65,8 @@ class LoraDatabase {
         berat            REAL,
         interval         INTEGER,
         jenis_ikan       TEXT,
-        id_ikan          INTEGER
+        id_ikan          INTEGER,
+        source           TEXT    NOT NULL DEFAULT 'local'
       )
     ''');
     await db.execute('CREATE INDEX idx_received_at ON $_table (received_at DESC)');
@@ -99,6 +100,11 @@ class LoraDatabase {
       ]) {
         await db.execute(col);
       }
+    }
+    
+    // Migrasi v3 → v4: tambah kolom source
+    if (oldVer < 4) {
+      await db.execute('ALTER TABLE $_table ADD COLUMN source TEXT NOT NULL DEFAULT "local"');
     }
   }
 
@@ -147,6 +153,7 @@ class LoraDatabase {
     bool unsyncedOnly = false,
     bool ascending = false,
     String? searchQuery,
+    String? sourceFilter, // 'all', 'local', 'server'
   }) async {
     final db = await database;
 
@@ -172,6 +179,10 @@ class LoraDatabase {
       where.add('(trail LIKE ? OR uuid LIKE ? OR raw_data LIKE ?)');
       final sq = '%${searchQuery.trim()}%';
       args.addAll([sq, sq, sq]);
+    }
+    if (sourceFilter != null && sourceFilter != 'all') {
+      where.add('source = ?');
+      args.add(sourceFilter);
     }
 
     final rows = await db.query(
