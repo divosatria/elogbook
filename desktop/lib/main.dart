@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
-import 'package:test_lora/data/database/lora_database.dart';
-import 'package:test_lora/shared/providers/lora_provider.dart';
-import 'package:test_lora/features/dashboard/screens/main_shell.dart';
-import 'package:test_lora/core/theme/app_colors.dart';
+import 'database/lora_database.dart';
+import 'providers/lora_provider.dart';
+import 'screens/main_shell.dart';
+import 'theme/app_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,17 +24,25 @@ class LoraApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prov = context.watch<LoraProvider>();
     return MaterialApp(
       title: 'LoRa Monitor 433MHz',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [Locale('id', 'ID'), Locale('en', 'US')],
       theme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: prov.isDarkMode ? Brightness.dark : Brightness.light,
         scaffoldBackgroundColor: AppColors.background,
-        colorScheme: const ColorScheme.dark(
-          surface: AppColors.surface,
+        colorScheme: ColorScheme(
+          brightness: prov.isDarkMode ? Brightness.dark : Brightness.light,
           primary: AppColors.blue,
+          onPrimary: Colors.white,
+          secondary: AppColors.blueBg,
+          onSecondary: Colors.white,
+          error: AppColors.danger,
+          onError: Colors.white,
+          surface: AppColors.surface,
+          onSurface: AppColors.textPrimary,
         ),
         fontFamily: 'sans-serif',
       ),
