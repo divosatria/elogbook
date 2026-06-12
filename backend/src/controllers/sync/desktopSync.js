@@ -45,8 +45,8 @@ exports.postSyncData = async (req, res) => {
   try {
     const syncData = req.body;
     
-    // Tambahkan log payload masuk agar kita tahu desktop kirim apa
-    console.log('[SYNC POST] Payload masuk dari desktop:', JSON.stringify(syncData, null, 2));
+    // Log jumlah data yang disinkronisasi alih-alih seluruh isi payload
+    console.log(`[SYNC POST] Menerima sinkronisasi dari desktop...`);
     
     if (!syncData) {
       await t.rollback();
