@@ -1,4 +1,5 @@
 const { sequelize } = require('../../config/database');
+const { emitSocketEvent } = require('../../services/core/socketService');
 
 // GET /api/edge/sync/data - Fetch data for desktop
 exports.getSyncData = async (req, res) => {
@@ -198,6 +199,19 @@ exports.postSyncData = async (req, res) => {
 
     // Commit transaction
     await t.commit();
+    
+    // Emit socket event so web frontend can auto-refresh
+    if (processedLoradata > 0 || processedTrips > 0 || processedHasilTangkap > 0) {
+      emitSocketEvent('edge_data_updated', {
+        timestamp: new Date().toISOString(),
+        source: 'desktop_sync',
+        processed: {
+          trips: processedTrips,
+          hasil_tangkap: processedHasilTangkap,
+          lora_packets: processedLoradata
+        }
+      });
+    }
     
     res.status(200).json({
       success: true,
